@@ -4,7 +4,7 @@ namespace Player
 {
     public class PlayerManager : MonoBehaviour
     {
-        private int _score;
+        [SerializeField] private int _score;
 
         public void IncreaseScore(int amount)
         {

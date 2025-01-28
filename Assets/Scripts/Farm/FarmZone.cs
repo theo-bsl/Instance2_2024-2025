@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Player;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Farm
@@ -19,6 +20,13 @@ namespace Farm
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            OnTriggerEnter2DRPC(collision);   
+        }
+        
+        
+        [Rpc(SendTo.Server)]
+        private void OnTriggerEnter2DRPC(Collider2D collision)
+        {
             PlayerManager player = collision.GetComponent<PlayerManager>();
             if (!player)
                 return;
@@ -31,7 +39,14 @@ namespace Farm
                 farmEarnPoints.PlayerEarningPoints = _firstPlayer;
             }
         }
+        
         private void OnTriggerExit2D(Collider2D collision)
+        {
+            OnTriggerExit2DRPC(collision);
+        }
+
+        [Rpc(SendTo.Server)]
+        private void OnTriggerExit2DRPC(Collider2D collision)
         {
             PlayerManager player = collision.GetComponent<PlayerManager>();
             if (_firstPlayer == player)
@@ -44,6 +59,7 @@ namespace Farm
                 RemoveLeavingPlayer(player);
             }
         }
+
 
         private void RemoveLeavingPlayer(PlayerManager leavingPlayer)
         {
