@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace Farm
 {
-    [RequireComponent(typeof(FarmEarn))]
+    [RequireComponent(typeof(FarmEarnPoints))]
     public class FarmZone : MonoBehaviour
     {
-        [SerializeField] private FarmEarn _farmEarn;
+        [SerializeField] private FarmEarnPoints farmEarnPoints;
 
         private readonly Stack<PlayerManager> _playersOrder = new();
         private PlayerManager _firstPlayer;
 
         private void Awake()
         {
-            _farmEarn = GetComponent<FarmEarn>();
+            farmEarnPoints = GetComponent<FarmEarnPoints>();
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -28,7 +28,7 @@ namespace Farm
             else
             {
                 _firstPlayer = player;
-                _farmEarn.PlayerEarningPoints = _firstPlayer;
+                farmEarnPoints.PlayerEarningPoints = _firstPlayer;
             }
         }
         private void OnTriggerExit2D(Collider2D collision)
@@ -37,7 +37,7 @@ namespace Farm
             if (_firstPlayer == player)
             {
                 _firstPlayer = _playersOrder.Count > 0 ? _playersOrder.Pop() : null;
-                _farmEarn.PlayerEarningPoints = _firstPlayer;
+                farmEarnPoints.PlayerEarningPoints = _firstPlayer;
             }
             else
             {

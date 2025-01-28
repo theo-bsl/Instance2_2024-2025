@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Farm
 {
-    public class FarmEarn : MonoBehaviour
+    public class FarmEarnPoints : MonoBehaviour
     {
         [SerializeField] private PlayerManager _playerEarningPoints;
         [SerializeField] private float _earningDelay;
