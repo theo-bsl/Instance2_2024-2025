@@ -8,6 +8,7 @@ namespace Player
     {
         public override void OnNetworkSpawn()
         {
+            Debug.Log(gameObject.name);
             if (!IsOwner)
             {
                 GetComponent<PlayerInput>().enabled = false;
