@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Player
@@ -5,11 +6,16 @@ namespace Player
     public class PlayerManager : MonoBehaviour
     {
         [SerializeField] private int _score;
-
-        public void IncreaseScore(int amount)
+        public int _dmgTaken;
+        
+        public void IncreaseScoreRPC(int amount)
         {
             _score += amount;
         }
 
+        public void TakeDamageRPC(int amount)
+        {
+            _dmgTaken += amount;
+        }
     }
 }

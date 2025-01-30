@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 899104476215120637}
   - component: {fileID: 146172051350391582}
   - component: {fileID: 7493310140075860314}
+  - component: {fileID: 1057755416480011319}
+  - component: {fileID: 8413265696023673857}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -79,6 +81,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerMovement: {fileID: 146172051350391582}
+  _playerAttack: {fileID: 1057755416480011319}
+  _playerRotation: {fileID: 8413265696023673857}
 --- !u!114 &6088281020653932224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,6 +124,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 163a73d9-540a-4ec7-bb34-bd3a602ffb0c
     m_ActionName: 'Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1057755416480011319}
+        m_TargetAssemblyTypeName: Player.PlayerAttack, Assembly-CSharp
+        m_MethodName: Attack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 35ca3c08-13d6-4c8f-a595-d7fe978b0f1e
+    m_ActionName: 'Player/Attack[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6347348028879124862}
+        m_TargetAssemblyTypeName: Player.PlayerController, Assembly-CSharp
+        m_MethodName: OnMouseMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4ec35190-d0fa-442d-b414-08093fe1ad6f
+    m_ActionName: 'Player/MousePosition[/Mouse/position]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -231,6 +267,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &1057755416480011319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313921584120553770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e95ab83e28f46368069fbaaf70f1979, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultDamage: 10
+  _comboDamage: 5
+  _comboDelay: 2
+  _attackDelay: 1
+--- !u!114 &8413265696023673857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313921584120553770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b5e7cff5e684eb69ee3f88ba8b037aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 931227948568759521}
 --- !u!1 &2509505317187290791
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,6 +397,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d3cdff8392c474986deae9eba269d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _score: 0
+  _dmgTaken: 0
 --- !u!61 &301220343872786345
 BoxCollider2D:
   m_ObjectHideFlags: 0
