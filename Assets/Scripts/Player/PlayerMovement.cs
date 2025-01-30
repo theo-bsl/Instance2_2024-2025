@@ -5,7 +5,7 @@ namespace Player
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovement : MonoBehaviour
     {
-        [SerializeField] private float _playerSpeed;
+        [SerializeField] private float _playerSpeed = 10.0f;
         
         private Rigidbody2D _playerBody;
         private Vector2 _movementDirection;

@@ -11,6 +11,7 @@ namespace Player
             if (!IsOwner)
             {
                 GetComponent<PlayerInput>().enabled = false;
+                GetComponentInChildren<PlayerRotation>().enabled = false;
                 GetComponentInChildren<Camera>().gameObject.SetActive(false);
             }
         }
