@@ -10,7 +10,7 @@ namespace Farm
         [SerializeField] private int _pointsAmount;
         private float _timer;
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (_playerEarningPoints)
             {

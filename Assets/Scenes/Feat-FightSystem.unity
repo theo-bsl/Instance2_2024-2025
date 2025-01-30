@@ -200,7 +200,7 @@ Transform:
   m_GameObject: {fileID: 349470155}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 5.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -414,8 +414,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerEarningPoints: {fileID: 0}
-  _earningDelay: 0.1
-  _pointsAmount: 1
+  _earningDelay: 5
+  _pointsAmount: 100
 --- !u!114 &1204245830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -475,7 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ProtocolType: 0
-  m_UseWebSockets: 0
+  m_UseWebSockets: 1
   m_UseEncryption: 0
   m_MaxPacketQueueSize: 128
   m_MaxPayloadSize: 6144
@@ -507,7 +507,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 1565327412}
-    PlayerPrefab: {fileID: 9162741999924990083, guid: c78f347660586a440abd084ce6667822, type: 3}
+    PlayerPrefab: {fileID: 3586110316325530466, guid: 4c1fa2aa6bbb3e641b42cbcdb690b4d0, type: 3}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: a0359cffa2d05614b883b9b044be27b9, type: 2}

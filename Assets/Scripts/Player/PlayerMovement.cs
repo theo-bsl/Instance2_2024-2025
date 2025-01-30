@@ -1,9 +1,10 @@
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerMovement : MonoBehaviour
+    public class PlayerMovement : NetworkBehaviour
     {
         [SerializeField] private float _playerSpeed = 10.0f;
         
@@ -15,7 +16,13 @@ namespace Player
             _playerBody = GetComponent<Rigidbody2D>();
         }
 
-        public void SetDirection(Vector2 Direction)
+        public void SetDirection(Vector2 dir)
+        {
+            SetDirectionRPC(dir);
+        }
+        
+        [Rpc(SendTo.Server)]
+        public void SetDirectionRPC(Vector2 Direction)
         {
             _movementDirection = Direction.normalized;
         }

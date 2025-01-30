@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Unity.Netcode;
+using UnityEngine;
 
 namespace Player
 {
-    public class PlayerRotation : MonoBehaviour
+    public class PlayerRotation : NetworkBehaviour
     {
         [SerializeField] private Camera cam;
         
@@ -23,9 +24,15 @@ namespace Player
             _transform.up = _rotation;
         }
         
-        public void SetMousePosition(Vector2 mousePosition)
+        [ServerRpc]
+        private void SetMousePositionServerRpc(Vector2 mousePosition)
         {
             _mousePosition = mousePosition;
+            Debug.Log($"SetMousePositionServerRpc: {mousePosition}");
+        }
+        public void SetMousePosition(Vector2 mousePosition)
+        {
+            SetMousePositionServerRpc(mousePosition);
         }
     }
 }
