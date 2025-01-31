@@ -5,12 +5,12 @@ namespace Player
 {
     public class PlayerManager : NetworkBehaviour
     {
-        [SerializeField] private int _score;
+        [SerializeField] private NetworkVariable<int> _score = new(0);
         public NetworkVariable<int> _dmgTaken = new(0);
         
         public void IncreaseScoreRPC(int amount)
         {
-            _score += amount;
+            _score.Value += amount;
         }
 
         [Rpc(SendTo.Server)]
@@ -18,6 +18,12 @@ namespace Player
         {
             Debug.Log(amount);
             _dmgTaken.Value += amount;
+            //_dmgTaken += amount;
+
+            // if (_dmgTaken >= 100)
+            // {
+            //     transform.position = Vector3.zero;
+            // }
         }
     }
 }

@@ -20,7 +20,17 @@ namespace Player
 
         private void Update()
         {
+            /*
             RotatePlayer();
+            */
+            
+            _mouseInput.x = Input.mousePosition.x;
+            _mouseInput.y = Input.mousePosition.y;
+            _mouseInput.z = cam.nearClipPlane;
+            Vector3 _worldMousePosition = cam.ScreenToWorldPoint(_mouseInput);
+            _worldMousePosition.z = 0f;
+            RotatePlayerServerRpc(_worldMousePosition);
+            
         }
 
         private void RotatePlayer()

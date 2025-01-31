@@ -14,11 +14,15 @@ namespace Player
                 GetComponentInChildren<Camera>().gameObject.SetActive(false);
             }
 
+            if (!IsOwner)
+            {
+                GetComponentInChildren<PlayerRotation>().enabled = false;
+            }
+
             if (!IsServer)
             {
                 GetComponentInChildren<PlayerManager>().enabled = false;
                 GetComponentInChildren<PlayerMovement>().enabled = false;
-                GetComponentInChildren<PlayerRotation>().enabled = false;
                 GetComponentInChildren<PlayerAttack>().enabled = false;
                 
             }
