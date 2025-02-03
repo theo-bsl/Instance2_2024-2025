@@ -9,6 +9,7 @@ namespace Player
         [SerializeField] private PlayerAttack _playerAttack;
         [SerializeField] private PlayerRotation _playerRotation;
         
+        
         public void OnMove(InputAction.CallbackContext context)
         {
             _playerMovement.SetDirection(context.ReadValue<Vector2>());
