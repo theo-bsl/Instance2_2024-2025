@@ -1,5 +1,7 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Player
 {
@@ -7,7 +9,6 @@ namespace Player
     {
         [SerializeField] private NetworkVariable<int> _score = new(0);
         public NetworkVariable<int> _dmgTaken = new(0);
-        
         public void IncreaseScoreRPC(int amount)
         {
             _score.Value += amount;
@@ -25,5 +26,7 @@ namespace Player
             //     transform.position = Vector3.zero;
             // }
         }
+        
+        public NetworkVariable<int> Score => _score;
     }
 }

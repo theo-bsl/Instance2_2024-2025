@@ -1,5 +1,6 @@
-﻿using Unity.Netcode;
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Player
 {
@@ -14,6 +15,8 @@ namespace Player
         private float _comboTimer;
         private float _fightTimer;
         private bool _isInCombo = false;
+        
+        private readonly UnityEvent _onEnemyBursted = new();
 
         void Awake()
         {
@@ -74,5 +77,7 @@ namespace Player
             _comboTimer = 0;
             _currentInflictedDamage += _comboDamage;
         }
+
+        public UnityEvent OnEnemyBursted => _onEnemyBursted;
     }
 }
