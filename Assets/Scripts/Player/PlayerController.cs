@@ -5,10 +5,10 @@ namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private PlayerManager _playerManager;
         [SerializeField] private PlayerMovement _playerMovement;
         [SerializeField] private PlayerAttack _playerAttack;
         [SerializeField] private PlayerRotation _playerRotation;
-        
         
         public void OnMove(InputAction.CallbackContext context)
         {
@@ -23,6 +23,11 @@ namespace Player
         public void OnMouseMove(InputAction.CallbackContext context)
         {
             _playerRotation.SetMousePosition(context.ReadValue<Vector2>());
+        }
+        
+        public void OnItemUsed(InputAction.CallbackContext context)
+        {
+            _playerManager.UseItem();
         }
     }
 }
