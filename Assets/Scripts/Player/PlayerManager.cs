@@ -71,5 +71,10 @@ namespace Player
                 }
             }
         }
+
+        public void Freeze()
+        {
+            _freezed = true;
+        }
     }
 }

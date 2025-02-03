@@ -15,10 +15,6 @@ namespace Player
         public override void OnNetworkSpawn()
         {
             _playerSpeed = _defaultPlayerSpeed;
-        }
-
-        void Awake()
-        {
             _playerBody = GetComponent<Rigidbody2D>();
         }
 
@@ -28,21 +24,35 @@ namespace Player
         }
         
         [Rpc(SendTo.Server)]
-        public void SetDirectionRPC(Vector2 Direction)
+        private void SetDirectionRPC(Vector2 Direction)
         {
             _movementDirection = Direction.normalized;
         }
-        void FixedUpdate()
+
+        private void FixedUpdate()
         {
             _playerBody.MovePosition(_playerBody.position + _movementDirection * (_playerSpeed * Time.deltaTime));
         }
 
         public void ModifySpeed(float speedModifier)
         {
+            ModifySpeedRPC(speedModifier);
+        }
+        
+        [Rpc(SendTo.Server)]
+        private void ModifySpeedRPC(float speedModifier)
+        {
             _playerSpeed += _playerSpeed * speedModifier;
         }
 
+
         public void ResetSpeed()
+        {
+            ResetSpeedRPC();
+        }
+        
+        [Rpc(SendTo.Server)]
+        private void ResetSpeedRPC()
         {
             _playerSpeed = _defaultPlayerSpeed;
         }
