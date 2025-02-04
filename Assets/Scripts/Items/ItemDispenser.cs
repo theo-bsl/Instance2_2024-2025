@@ -10,7 +10,7 @@ namespace Items
     {
         [SerializeField] private List<ItemPercent> items;
 
-        public Item GetItem()
+        public GameObject GetItem()
         {
             foreach (var item in items)
             {
@@ -18,13 +18,15 @@ namespace Items
                     return item.Item;
             }
             
+            GetComponent<NetworkObject>().Despawn();
+            
             return items[^1].Item;
         }
 
         [Serializable]
-        struct ItemPercent
+        private struct ItemPercent
         {
-            public Item Item;
+            public GameObject Item;
             
             [Range(0, 100)]public float Percent;
         }

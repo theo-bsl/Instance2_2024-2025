@@ -39,6 +39,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 989861319677265}
+  - {fileID: 5916264181528760968}
   m_Father: {fileID: 6757107269138397399}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5514954287337666895
@@ -136,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  _playerSpeed: 10
+  _defaultPlayerSpeed: 10
 --- !u!114 &1764488269344706868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,8 +151,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  _score: 0
-  _dmgTaken: 0
+  _score:
+    m_InternalValue: 0
+  _dmgTaken:
+    m_InternalValue: 0
+  _maxDmgTaken: 100
+  _gunTransform: {fileID: 5916264181528760968}
+  _item: {fileID: 0}
 --- !u!114 &6433925687169330224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417,6 +423,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 4ec35190-d0fa-442d-b414-08093fe1ad6f
     m_ActionName: 'Player/MousePosition[/Mouse/position]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2040865377516737830}
+        m_TargetAssemblyTypeName: Player.PlayerController, Assembly-CSharp
+        m_MethodName: OnItemUsed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e082ba7f-7f3d-487b-ac0f-325abcbc63ad
+    m_ActionName: 'Player/UseItem[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -434,6 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e57f06cb5ec042fd81a0a8419467275d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerManager: {fileID: 1764488269344706868}
   _playerMovement: {fileID: 6573687982691566926}
   _playerAttack: {fileID: 7997632398369669264}
   _playerRotation: {fileID: 6433925687169330224}
@@ -537,6 +560,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &8822424150477515811
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5916264181528760968}
+  m_Layer: 0
+  m_Name: GunTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5916264181528760968
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8822424150477515811}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6751701180064882991}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9206550910347882932
 GameObject:
   m_ObjectHideFlags: 0

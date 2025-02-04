@@ -27,7 +27,8 @@ namespace Player
         
         public void OnItemUsed(InputAction.CallbackContext context)
         {
-            _playerManager.UseItem();
+            if (context.started)
+                _playerManager.UseItem();
         }
     }
 }
