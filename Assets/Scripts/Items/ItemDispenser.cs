@@ -2,25 +2,24 @@
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 namespace Items
 {
     public class ItemDispenser : NetworkBehaviour
     {
+        [Header("Item Box")]
+        [SerializeField] private float _respawnTime = 5f;
+        
+        [Header("Item Dispenser")]
         [SerializeField] private List<ItemPercent> items;
+        
+        private readonly UnityEvent<float, Vector3> _onDestroy = new();
 
         public GameObject GetItem()
         {
-            foreach (var item in items)
-            {
-                if (item.Percent >= Random.value * 100f)
-                    return item.Item;
-            }
-            
-            GetComponent<NetworkObject>().Despawn();
-            
-            return items[^1].Item;
+            return items[Random.Range(0, items.Count)].Item;
         }
 
         [Serializable]
@@ -30,5 +29,13 @@ namespace Items
             
             [Range(0, 100)]public float Percent;
         }
+
+        public void Despawn()
+        {
+            _onDestroy.Invoke(_respawnTime, transform.position);
+            GetComponent<NetworkObject>().Despawn();
+        }
+        
+        public UnityEvent<float, Vector3> OnDestroy => _onDestroy;
     }
 }

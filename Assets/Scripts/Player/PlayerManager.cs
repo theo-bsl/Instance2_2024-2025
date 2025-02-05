@@ -93,34 +93,35 @@ namespace Player
         {
             if (other.TryGetComponent(out ItemDispenser itemDispenser))
             {
-                _item = Instantiate(itemDispenser.GetItem(),transform);
-                _item.GetComponent<NetworkObject>().Spawn(true);
-                _item.SetActive(false);
+                GameObject item = itemDispenser.GetItem();
+                itemDispenser.Despawn();
 
-                foreach (Item item in _item.GetComponents<Item>())
+                foreach (Item itemComponent in item.GetComponents<Item>())
                 {
-                    if (item is SpeedModifier)
+                    if (itemComponent is SpeedModifier)
                     {
-                        item.OnDo.AddListener(obj =>
+                        _item = item;
+                        itemComponent.OnDo.AddListener(obj =>
                         {
                             (float speedModifier, float duration) = ((float, float))obj;
                             ModifySpeed(speedModifier, duration);
                         });
                     }
-                    else if (item is DamageModifier)
+                    else if (itemComponent is DamageModifier)
                     {
-                        item.OnDo.AddListener(obj =>
+                        _item = item;
+                        itemComponent.OnDo.AddListener(obj =>
                         {
                             (float damageModifier, float duration) = ((float, float))obj;
                             ModifyDamage(damageModifier, duration);
                         });
                     }
-                    else if (item is FreezeGun)
+                    else if (itemComponent is FreezeGun)
                     {
-                        _item.SetActive(true);
-                        _item.transform.SetParent(transform.parent);
+                        _item = Instantiate(item,transform.parent);
                         _item.transform.localPosition = Vector3.zero;
                         _item.transform.up = transform.up;
+                        _item.GetComponent<NetworkObject>().Spawn(true);
                         _item.GetComponent<GunFollow>().Target = _gunTransform;
                     }
                 }
