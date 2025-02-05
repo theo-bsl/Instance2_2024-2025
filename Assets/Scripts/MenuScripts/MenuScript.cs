@@ -1,10 +1,12 @@
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour
 {
     public void StartGame()
     {
-        //Insérer code pour rechercher et rejoindre un lobby
-        Debug.Log("Jouer");
+        NetworkManager.Singleton.StartClient();
+        SceneManager.LoadScene(1);
     }
 }
