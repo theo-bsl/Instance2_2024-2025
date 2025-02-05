@@ -1,32 +1,43 @@
 using System;
+using Leaderboard;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Player
 {
+    
     public class PlayerManager : NetworkBehaviour
     {
+        [SerializeField] private int _damageLimit = 150;
+        [SerializeField] private int _burstedScoreEarn = 150;
         [SerializeField] private NetworkVariable<int> _score = new(0);
-        public NetworkVariable<int> _dmgTaken = new(0);
+        [SerializeField] private NetworkVariable<int> _dmgTaken = new(0);
+        public NetworkVariable<int> _playerName = new(0);
+
+        public override void OnNetworkSpawn()
+        {
+            GetComponent<PlayerAttack>().OnEnemyBursted.AddListener(() => IncreaseScoreRPC(_burstedScoreEarn));
+        }
+        
+        [Rpc(SendTo.Server)]
         public void IncreaseScoreRPC(int amount)
         {
             _score.Value += amount;
         }
 
         [Rpc(SendTo.Server)]
-        public void TakeDamageRPC(int amount)
+        private void TakeDamageRPC(int amount)
         {
-            Debug.Log(amount);
             _dmgTaken.Value += amount;
-            //_dmgTaken += amount;
+        }
 
-            // if (_dmgTaken >= 100)
-            // {
-            //     transform.position = Vector3.zero;
-            // }
+        public bool TakeDamage(int amount)
+        {
+            TakeDamageRPC(amount);
+            return _dmgTaken.Value >= _damageLimit;
         }
         
         public NetworkVariable<int> Score => _score;
+        public NetworkVariable<int> PlayerName => _playerName;
     }
 }

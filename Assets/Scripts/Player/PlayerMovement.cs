@@ -11,7 +11,7 @@ namespace Player
         private Rigidbody2D _playerBody;
         private Vector2 _movementDirection;
 
-        void Awake()
+        public override void OnNetworkSpawn()
         {
             _playerBody = GetComponent<Rigidbody2D>();
         }

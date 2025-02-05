@@ -64,7 +64,8 @@ namespace Player
                 
 
                     ComboSystem();
-                    enemy.TakeDamageRPC(_currentInflictedDamage);
+                    if (enemy.TakeDamage(_currentInflictedDamage))
+                        _onEnemyBursted.Invoke();
                     Debug.Log("dmg" + enemy.name);
                 }
             }
