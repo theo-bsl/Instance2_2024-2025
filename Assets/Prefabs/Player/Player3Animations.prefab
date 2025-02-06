@@ -191,6 +191,7 @@ MonoBehaviour:
   _comboDamage: 5
   _comboDelay: 2
   _attackDelay: 1
+  _attackSize: 0.5
 --- !u!114 &5460954819730498647
 MonoBehaviour:
   m_ObjectHideFlags: 0
