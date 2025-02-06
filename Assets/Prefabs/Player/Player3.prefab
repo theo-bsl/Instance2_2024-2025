@@ -150,8 +150,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  _score: 0
-  _dmgTaken: 0
+  _damageLimit: 150
+  _burstedScoreEarn: 150
+  _score:
+    m_InternalValue: 0
+  _dmgTaken:
+    m_InternalValue: 0
+  _playerName:
+    m_InternalValue: 0
+  _leaderboardManager: {fileID: 0}
 --- !u!114 &6433925687169330224
 MonoBehaviour:
   m_ObjectHideFlags: 0

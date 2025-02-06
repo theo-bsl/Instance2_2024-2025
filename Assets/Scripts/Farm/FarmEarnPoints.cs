@@ -1,3 +1,4 @@
+using Leaderboard;
 using Player;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ namespace Farm
         [SerializeField] private float _earningDelay;
         [SerializeField] private int _pointsAmount;
         private float _timer;
+        [SerializeField] private LeaderboardManager _leaderboardManager;
+
 
         private void FixedUpdate()
         {

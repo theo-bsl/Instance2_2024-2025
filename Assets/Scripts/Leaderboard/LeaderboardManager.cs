@@ -18,18 +18,26 @@ namespace Leaderboard
         private static LeaderboardManager _leaderboardManager;
         public NetworkVariable<int> _playerId = new(0);
 
-        public override void OnNetworkSpawn()
+        public void Awake()
         {
-            if (!IsServer)
-                return;
+            // if (!IsServer)
+            // {
+            //     this.enabled = false;
+            //     return;
+            // }
             
             Debug.Log("LeaderboardManager is server");
             if (!_leaderboardManager)
                 _leaderboardManager = this;
             else
                 enabled = false;
+            
         }
-        
+
+        public override void OnNetworkSpawn()
+        {
+        }
+
         public void AddNewPlayerID(ulong playerID)
         {
             AddNewPlayerIDRpc(playerID);
@@ -40,25 +48,25 @@ namespace Leaderboard
         {
             var player = NetworkManager.Singleton.ConnectedClients[playerID].PlayerObject;
             PlayerManager manager = TryGetComponentInChildren<PlayerManager>(player.transform);
-            
-            _playerId.Value++;
-            manager.PlayerName.Value = _playerId.Value;
+
             Debug.Log($"player ID : {manager.PlayerName.Value}");
             
             if (!_allPlayers.Contains(manager))
                 _allPlayers.Add(manager);
+            Debug.Log("Score : " + manager.Score.Value);
             
-            LeaderBoardUpdate();
             manager.Score.OnValueChanged += (_, _) => LeaderBoardUpdate();
+            LeaderBoardUpdate();
         }
 
-        private void LeaderBoardUpdate()
+        public void LeaderBoardUpdate()
         {
             Debug.Log("LeaderboardUpdate");
             var obd = _allPlayers.OrderByDescending(x => x.Score.Value);
             var take = obd.Take(_nbPlayerInLeaderboard);
             var select = take.Select(pm => pm.GetComponentInParent<NetworkObject>().OwnerClientId);
             var array = select.ToArray();
+            Debug.Log(_allPlayers[0].Score.Value);
             _updateLeaderboard.Invoke(array);
         }
 

@@ -1,5 +1,3 @@
-using System;
-using Leaderboard;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -12,11 +10,15 @@ namespace Player
         [SerializeField] private int _burstedScoreEarn = 150;
         [SerializeField] private NetworkVariable<int> _score = new(0);
         [SerializeField] private NetworkVariable<int> _dmgTaken = new(0);
-        public NetworkVariable<int> _playerName = new(0);
+        public NetworkVariable<int> _playerName = new NetworkVariable<int>();
 
         public override void OnNetworkSpawn()
         {
             GetComponent<PlayerAttack>().OnEnemyBursted.AddListener(() => IncreaseScoreRPC(_burstedScoreEarn));
+            if (IsOwner)
+            {
+                _playerName = new((int)OwnerClientId);
+            }
         }
         
         [Rpc(SendTo.Server)]
@@ -39,5 +41,6 @@ namespace Player
         
         public NetworkVariable<int> Score => _score;
         public NetworkVariable<int> PlayerName => _playerName;
+
     }
 }
