@@ -6,7 +6,7 @@ public class StartClient : MonoBehaviour
 {
     public void StartGame()
     {
-        NetworkManager.Singleton.StartClient();
-        SceneManager.LoadScene(1);
+        //NetworkManager.Singleton.StartClient();
+        SceneManager.LoadScene("GameScene");
     }
 }
