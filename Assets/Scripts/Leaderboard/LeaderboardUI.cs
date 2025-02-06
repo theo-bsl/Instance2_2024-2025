@@ -23,21 +23,13 @@ namespace Leaderboard
         {
             int[] playersScores = new int[leaderboardPlayersList.Length];
             var clients = NetworkManager.Singleton.ConnectedClients;
-            Debug.Log("leaderboard lenght : " + leaderboardPlayersList.Length);
             
             for (int i = 0; i < leaderboardPlayersList.Length; i++)
             {
                 var player = clients[leaderboardPlayersList[i]].PlayerObject;
                 var playerManager = TryGetComponentInChildren<PlayerManager>(player.transform);
                 
-                // _leaderboardScores[i].SetText(playerManager.Score.Value.ToString());
                 playersScores[i] = playerManager.Score.Value;
-                // _leaderboardNames[i].SetText(playerManager.PlayerName.Value + " :");
-                
-                Debug.Log($"player name : {playerManager.PlayerName.Value}");
-                
-                Debug.Log($"player score : {playerManager.Score.Value.ToString()}");
-
             }
             ShowLeaderboardRpc(leaderboardPlayersList, playersScores);
         }
@@ -48,7 +40,7 @@ namespace Leaderboard
             for (int i = 0; i < leaderboardPlayersList.Length; i++)
             {
                 _leaderboardScores[i].SetText(score[i].ToString());
-                _leaderboardNames[i].SetText(leaderboardPlayersList[i].ToString() + " :");
+                _leaderboardNames[i].SetText(leaderboardPlayersList[i] + " :");
             }
         }
         
