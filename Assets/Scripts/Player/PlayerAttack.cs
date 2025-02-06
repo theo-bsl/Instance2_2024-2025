@@ -1,5 +1,6 @@
-﻿using Unity.Netcode;
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Player
 {
@@ -14,6 +15,8 @@ namespace Player
         private float _comboTimer;
         private float _fightTimer;
         private bool _isInCombo = false;
+        
+        private readonly UnityEvent _onEnemyBursted = new();
 
         void Awake()
         {
@@ -61,7 +64,8 @@ namespace Player
                 
 
                     ComboSystem();
-                    enemy.TakeDamageRPC(_currentInflictedDamage);
+                    if (enemy.TakeDamage(_currentInflictedDamage))
+                        _onEnemyBursted.Invoke();
                     Debug.Log("dmg" + enemy.name);
                 }
             }
@@ -74,7 +78,7 @@ namespace Player
             _comboTimer = 0;
             _currentInflictedDamage += _comboDamage;
         }
-
+        
         public void ModifyDamage(float damageModifier)
         {
             ModifyDamageRpc(damageModifier);
@@ -96,5 +100,7 @@ namespace Player
         {
             _currentInflictedDamage = _defaultDamage;
         }
+        
+        public UnityEvent OnEnemyBursted => _onEnemyBursted;
     }
 }

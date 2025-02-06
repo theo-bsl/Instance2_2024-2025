@@ -1,3 +1,4 @@
+using Leaderboard;
 using System.Collections;
 using Items;
 using Unity.Netcode;
@@ -5,8 +6,11 @@ using UnityEngine;
 
 namespace Player
 {
+    
     public class PlayerManager : NetworkBehaviour
     {
+        [SerializeField] private int _damageLimit = 150;
+        [SerializeField] private int _burstedScoreEarn = 150;
         [SerializeField] private NetworkVariable<int> _score = new(0);
         [SerializeField] private NetworkVariable<float> _dmgTaken = new(0);
         [SerializeField] private float _maxDmgTaken = 100f;
@@ -20,30 +24,37 @@ namespace Player
         
         private GameObject _instanciatedItem;
 
+        private NetworkVariable<int> _playerName = new(0);
+        
         public override void OnNetworkSpawn()
         {
             _playerMovement = GetComponent<PlayerMovement>();
             _playerRotation = GetComponent<PlayerRotation>();
-            _playerAttack = GetComponent<PlayerAttack>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
-        }
+            _playerAttack = GetComponent<PlayerAttack>();
 
-        public void IncreaseScore(int amount)
+            _playerAttack.OnEnemyBursted.AddListener(() => IncreaseScoreRPC(_burstedScoreEarn));
+
+            if (IsOwner)
+                _playerName = new((int)OwnerClientId);
+        }        
+        
+        [Rpc(SendTo.Server)]
+        public void IncreaseScoreRPC(int amount)
         {
             _score.Value += amount;
         }
 
         [Rpc(SendTo.Server)]
-        public void TakeDamageRPC(float amount)
+        private void TakeDamageRPC(float amount)
         {
-            Debug.Log(amount);
             _dmgTaken.Value += amount;
-            //_dmgTaken += amount;
+        }
 
-            // if (_dmgTaken >= 100)
-            // {
-            //     transform.position = Vector3.zero;
-            // }
+        public bool TakeDamage(float amount)
+        {
+            TakeDamageRPC(amount);
+            return _dmgTaken.Value >= _damageLimit;
         }
 
         public void UseItem()
@@ -145,5 +156,8 @@ namespace Player
             _playerRotation.Freeze(false);
             _spriteRenderer.color = Color.white;
         }
+  
+        public NetworkVariable<int> Score => _score;
+        public NetworkVariable<int> PlayerName => _playerName;
     }
 }
