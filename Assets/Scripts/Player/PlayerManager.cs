@@ -25,7 +25,7 @@ namespace Player
         private GameObject _instanciatedItem;
 
         private NetworkVariable<int> _playerName = new(0);
-
+        
         public override void OnNetworkSpawn()
         {
             _playerMovement = GetComponent<PlayerMovement>();
@@ -156,9 +156,8 @@ namespace Player
             _playerRotation.Freeze(false);
             _spriteRenderer.color = Color.white;
         }
-        
+  
         public NetworkVariable<int> Score => _score;
         public NetworkVariable<int> PlayerName => _playerName;
-
     }
 }

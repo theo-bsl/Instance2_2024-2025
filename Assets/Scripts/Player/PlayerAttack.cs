@@ -100,7 +100,7 @@ namespace Player
         {
             _currentInflictedDamage = _defaultDamage;
         }
-
+        
         public UnityEvent OnEnemyBursted => _onEnemyBursted;
     }
 }

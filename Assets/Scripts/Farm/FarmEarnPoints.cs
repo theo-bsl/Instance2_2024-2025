@@ -21,7 +21,7 @@ namespace Farm
                 if (_timer > _earningDelay)
                 {
                     _timer = 0;
-                    _playerEarningPoints?.IncreaseScoreRPC(_pointsAmount);
+                    _playerEarningPoints?.IncreaseScore(_pointsAmount);
                 }
             }
             else
