@@ -150,6 +150,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 730024954}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &501571589
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2570147374564902362, guid: 1c21774f540e1ed45bcc3c1d6516aae1, type: 3}
+      propertyPath: m_Name
+      value: Map
+      objectReference: {fileID: 0}
+    - target: {fileID: 2685632353092069682, guid: 1c21774f540e1ed45bcc3c1d6516aae1, type: 3}
+      propertyPath: m_SortingOrder
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451422384264542436, guid: 1c21774f540e1ed45bcc3c1d6516aae1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451422384264542436, guid: 1c21774f540e1ed45bcc3c1d6516aae1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451422384264542436, guid: 1c21774f540e1ed45bcc3c1d6516aae1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451422384264542436, guid: 1c21774f540e1ed45bcc3c1d6516aae1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451422384264542436, guid: 1c21774f540e1ed45bcc3c1d6516aae1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451422384264542436, guid: 1c21774f540e1ed45bcc3c1d6516aae1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451422384264542436, guid: 1c21774f540e1ed45bcc3c1d6516aae1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451422384264542436, guid: 1c21774f540e1ed45bcc3c1d6516aae1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451422384264542436, guid: 1c21774f540e1ed45bcc3c1d6516aae1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451422384264542436, guid: 1c21774f540e1ed45bcc3c1d6516aae1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1c21774f540e1ed45bcc3c1d6516aae1, type: 3}
 --- !u!1 &520347648
 GameObject:
   m_ObjectHideFlags: 0
@@ -1347,25 +1408,13 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 3293642974
       objectReference: {fileID: 0}
-    - target: {fileID: 502191098198810449, guid: 826d788d454011d4fb3863850e15b8e8, type: 3}
-      propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 2515518193
-      objectReference: {fileID: 0}
-    - target: {fileID: 2086913820936719639, guid: 826d788d454011d4fb3863850e15b8e8, type: 3}
-      propertyPath: _earningDelay
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2086913820936719639, guid: 826d788d454011d4fb3863850e15b8e8, type: 3}
-      propertyPath: _pointsAmount
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 3143093742905398764, guid: 826d788d454011d4fb3863850e15b8e8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4.89
       objectReference: {fileID: 0}
     - target: {fileID: 3143093742905398764, guid: 826d788d454011d4fb3863850e15b8e8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -5.152
       objectReference: {fileID: 0}
     - target: {fileID: 3143093742905398764, guid: 826d788d454011d4fb3863850e15b8e8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1521,3 +1570,4 @@ SceneRoots:
   - {fileID: 1779902437}
   - {fileID: 1990720576}
   - {fileID: 1700504797}
+  - {fileID: 501571589}
