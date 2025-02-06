@@ -12,6 +12,8 @@ namespace Player
         private Vector2 _mousePosition = Vector2.zero;
         private Vector3 _worldMousePosition = Vector3.zero;
         private Vector3 _mouseInput = Vector3.zero;
+        
+        private bool _isFreezed = false;
 
         private void Awake()
         {
@@ -20,9 +22,8 @@ namespace Player
 
         private void Update()
         {
-            /*
-            RotatePlayer();
-            */
+            if (_isFreezed)
+                return;
             
             _mouseInput.x = Input.mousePosition.x;
             _mouseInput.y = Input.mousePosition.y;
@@ -64,6 +65,11 @@ namespace Player
         public void SetMousePosition(Vector2 mousePosition)
         {
             SetMousePositionServerRpc(Input.mousePosition);
+        }
+
+        public void Freeze(bool freeze)
+        {
+            _isFreezed = freeze;
         }
     }
 }

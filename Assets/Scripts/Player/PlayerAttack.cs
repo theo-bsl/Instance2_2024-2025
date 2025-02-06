@@ -11,7 +11,7 @@ namespace Player
         [SerializeField] private float _comboDelay = 2;
         [SerializeField] private float _attackDelay = 1;
         
-        private int _currentInflictedDamage;
+        private float _currentInflictedDamage;
         private float _comboTimer;
         private float _fightTimer;
         private bool _isInCombo = false;
@@ -77,6 +77,28 @@ namespace Player
             
             _comboTimer = 0;
             _currentInflictedDamage += _comboDamage;
+        }
+        
+        public void ModifyDamage(float damageModifier)
+        {
+            ModifyDamageRpc(damageModifier);
+        }
+
+        [Rpc(SendTo.Server)]
+        private void ModifyDamageRpc(float damageModifier)
+        {
+            _currentInflictedDamage += damageModifier * _currentInflictedDamage;
+        }
+
+        public void ResetDamage()
+        {
+            ResetDamageRpc();
+        }
+        
+        [Rpc(SendTo.Server)]
+        private void ResetDamageRpc()
+        {
+            _currentInflictedDamage = _defaultDamage;
         }
 
         public UnityEvent OnEnemyBursted => _onEnemyBursted;
