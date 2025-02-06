@@ -15,8 +15,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Feat-FightSystem.unity
     guid: 8e3dd7c9f3ef35f46b2c5cc8149a3add
   - enabled: 1
-    path: Assets/Scenes/Feat-Animations.unity
-    guid: 0ff86cfd3c2114a4086efdd4430e6532
+    path: Assets/Scenes/Feat-Leaderboard.unity
+    guid: f3b4fb46eb176ec4d82f93aa2f87ff79
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
