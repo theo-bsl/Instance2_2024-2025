@@ -1,4 +1,3 @@
-using Leaderboard;
 using System.Collections;
 using Items;
 using Unity.Netcode;
@@ -22,7 +21,7 @@ namespace Player
         private PlayerAttack _playerAttack;
         private SpriteRenderer _spriteRenderer;
         
-        private GameObject _instanciatedItem;
+        private GameObject _instantiatedItem;
 
         private NetworkVariable<int> _playerName = new(0);
         

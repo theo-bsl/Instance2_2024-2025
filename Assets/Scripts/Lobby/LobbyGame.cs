@@ -18,7 +18,6 @@ namespace Lobby
         
         private void ManageNewPlayer(ulong id)
         {
-            Debug.Log($"Player {id} joined the lobby");
             _leaderboard.AddNewPlayerID(id);
         }
     }
