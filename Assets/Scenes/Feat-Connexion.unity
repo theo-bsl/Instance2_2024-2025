@@ -609,6 +609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 1430616009}
+  _apiUrl: https://192.168.1.226/GetDatas.php
 --- !u!114 &1430616009
 MonoBehaviour:
   m_ObjectHideFlags: 0
