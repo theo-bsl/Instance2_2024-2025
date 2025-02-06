@@ -14,39 +14,44 @@ namespace Leaderboard
         
         public override void OnNetworkSpawn()
         {
-            SetInstanceRpc();
-            _leaderboardManager.UpdateLeaderboard.AddListener(UpdateLeaderboardRpc);
+            _leaderboardManager = LeaderboardManager.Instance;
+            _leaderboardManager.UpdateLeaderboard.AddListener(UpdateLeaderboard);
         }
 
-        [Rpc(SendTo.Server)]
-        private void SetInstanceRpc()
-        {
-            _leaderboardManager = LeaderboardManager.Instance;
-        }
         
-        [Rpc(SendTo.ClientsAndHost)]
-        private void UpdateLeaderboardRpc(ulong[] leaderboardPlayersList)
+        private void UpdateLeaderboard(ulong[] leaderboardPlayersList)
         {
-            Debug.Log(leaderboardPlayersList[0]);
-            
+            int[] playersScores = new int[leaderboardPlayersList.Length];
             var clients = NetworkManager.Singleton.ConnectedClients;
+            Debug.Log("leaderboard lenght : " + leaderboardPlayersList.Length);
             
             for (int i = 0; i < leaderboardPlayersList.Length; i++)
             {
                 var player = clients[leaderboardPlayersList[i]].PlayerObject;
                 var playerManager = TryGetComponentInChildren<PlayerManager>(player.transform);
                 
+                // _leaderboardScores[i].SetText(playerManager.Score.Value.ToString());
+                playersScores[i] = playerManager.Score.Value;
+                // _leaderboardNames[i].SetText(playerManager.PlayerName.Value + " :");
+                
                 Debug.Log($"player name : {playerManager.PlayerName.Value}");
-                
-                _leaderboardNames[i].SetText(playerManager.PlayerName.Value + " :");
-                
-                _leaderboardScores[i].SetText(playerManager.Score.Value.ToString());
                 
                 Debug.Log($"player score : {playerManager.Score.Value.ToString()}");
 
             }
+            ShowLeaderboardRpc(leaderboardPlayersList, playersScores);
         }
 
+        [Rpc(SendTo.ClientsAndHost)]
+        private void ShowLeaderboardRpc(ulong[] leaderboardPlayersList, int[] score)
+        {
+            for (int i = 0; i < leaderboardPlayersList.Length; i++)
+            {
+                _leaderboardScores[i].SetText(score[i].ToString());
+                _leaderboardNames[i].SetText(leaderboardPlayersList[i].ToString() + " :");
+            }
+        }
+        
         private T TryGetComponentInChildren<T>(Transform playerTransform)
         {
             Transform[] transforms = playerTransform.GetComponentsInChildren<Transform>();

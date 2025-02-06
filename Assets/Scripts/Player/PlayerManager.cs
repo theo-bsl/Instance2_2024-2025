@@ -159,5 +159,6 @@ namespace Player
         
         public NetworkVariable<int> Score => _score;
         public NetworkVariable<int> PlayerName => _playerName;
+
     }
 }
