@@ -56,7 +56,7 @@ public class SkinSelection : MonoBehaviour
         }
     }
 
-    private void ApplySkin()
+    public void ApplySkin()
     {
         StartCoroutine(SetNewSkin());
     }
