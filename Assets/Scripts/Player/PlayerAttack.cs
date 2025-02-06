@@ -64,13 +64,24 @@ namespace Player
                     
                     if (!hit2D.collider.TryGetComponent(out PlayerManager enemy))
                         return;
-                
-                    Debug.DrawRay(transform.position,enemy.transform.position-transform.position,Color.red,5);
-                    
-                    ComboSystem();
-                    if (enemy.TakeDamage(_currentInflictedDamage))
-                        _onEnemyBursted.Invoke();
-                    Debug.Log("dmg" + enemy.name);
+
+                    RaycastHit2D[] raycastToEnemy = Physics2D.RaycastAll(transform.position, enemy.transform.position - transform.position, _attackDistance);
+
+                    foreach (var raycastHit in raycastToEnemy)
+                    {
+                        if (raycastHit.transform == transform) 
+                            continue;
+                        
+                        if (raycastHit.transform != enemy.transform)
+                            break;
+                        
+                        ComboSystem();
+                        if (enemy.TakeDamage(_currentInflictedDamage))
+                            _onEnemyBursted.Invoke();
+                        Debug.Log("dmg" + enemy.name);
+                    }
+                        
+                   
                 }
             }
         }
