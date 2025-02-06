@@ -2127,17 +2127,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DINDON.IO
+  m_text: Dindon.io
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: fbc8a61eab90e434c8f6cba123c176a9, type: 2}
-  m_sharedMaterial: {fileID: -5584077850767485708, guid: fbc8a61eab90e434c8f6cba123c176a9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: acbb2e72920bfcd418a104237f5536e0, type: 2}
+  m_sharedMaterial: {fileID: 4120508706156230731, guid: acbb2e72920bfcd418a104237f5536e0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4291095551
+  m_fontColor: {r: 1, g: 0.92167455, b: 0.76792455, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
