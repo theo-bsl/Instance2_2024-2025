@@ -1,4 +1,4 @@
-using Unity.Netcode;
+﻿using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,6 +10,8 @@ namespace Player
         [SerializeField] private int _comboDamage = 5;
         [SerializeField] private float _comboDelay = 2;
         [SerializeField] private float _attackDelay = 1;
+        [SerializeField] private float _attackSize = 0.25f;
+        [SerializeField] private float _attackDistance = 0.35f;
         
         private float _currentInflictedDamage;
         private float _comboTimer;
@@ -52,7 +54,8 @@ namespace Player
                 _fightTimer = 0;
                 
                 float angle = Vector2.Angle(Vector2.up, transform.up);
-                RaycastHit2D[] castAll = Physics2D.BoxCastAll(transform.position, Vector2.one, angle,transform.up);
+                RaycastHit2D[] castAll = Physics2D.BoxCastAll(transform.position, Vector2.one * _attackSize, angle,transform.up, _attackDistance);
+                
                 
                 foreach (var hit2D in castAll)
                 {
@@ -62,7 +65,8 @@ namespace Player
                     if (!hit2D.collider.TryGetComponent(out PlayerManager enemy))
                         return;
                 
-
+                    Debug.DrawRay(transform.position,enemy.transform.position-transform.position,Color.red,5);
+                    
                     ComboSystem();
                     if (enemy.TakeDamage(_currentInflictedDamage))
                         _onEnemyBursted.Invoke();
