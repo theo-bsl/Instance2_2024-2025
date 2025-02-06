@@ -7,10 +7,11 @@ namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private PlayerManager _playerManager;
         [SerializeField] private PlayerMovement _playerMovement;
         [SerializeField] private PlayerAttack _playerAttack;
         [SerializeField] private PlayerRotation _playerRotation;
-        [SerializeField] private Animator _playerAnimator;        
+        [SerializeField] private Animator _playerAnimator;
         
         public void OnMove(InputAction.CallbackContext context)
         {
@@ -35,6 +36,12 @@ namespace Player
         public void OnMouseMove(InputAction.CallbackContext context)
         {
             _playerRotation.SetMousePosition(context.ReadValue<Vector2>());
+        }
+        
+        public void OnItemUsed(InputAction.CallbackContext context)
+        {
+            if (context.started)
+                _playerManager.UseItem();
         }
 
         [Rpc(SendTo.Server)]

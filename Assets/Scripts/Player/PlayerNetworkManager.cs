@@ -24,7 +24,7 @@ namespace Player
                 GetComponentInChildren<PlayerManager>().enabled = false;
                 GetComponentInChildren<PlayerMovement>().enabled = false;
                 GetComponentInChildren<PlayerAttack>().enabled = false;
-                
+                GetComponentInChildren<Collider2D>().enabled = false;
             }
         }
     }

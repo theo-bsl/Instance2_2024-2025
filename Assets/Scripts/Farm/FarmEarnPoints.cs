@@ -5,10 +5,10 @@ namespace Farm
 {
     public class FarmEarnPoints : MonoBehaviour
     {
-        [SerializeField] private PlayerManager _playerEarningPoints;
         [SerializeField] private float _earningDelay;
         [SerializeField] private int _pointsAmount;
         private float _timer;
+        private PlayerManager _playerEarningPoints;
 
         private void FixedUpdate()
         {
