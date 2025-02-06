@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Feat-Network.unity
     guid: 18ac5f9c561e6b8469e0b5c0a2794b30
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Feat-FightSystem.unity
     guid: 8e3dd7c9f3ef35f46b2c5cc8149a3add
   - enabled: 1
