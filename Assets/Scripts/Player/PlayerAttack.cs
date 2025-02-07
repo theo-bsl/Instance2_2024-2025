@@ -1,4 +1,5 @@
-﻿using Unity.Netcode;
+﻿using Sound;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -83,6 +84,8 @@ namespace Player
                         
                    
                 }
+                
+                PlaySoundRpc(SoundType.Hit);
             }
         }
 
@@ -114,6 +117,12 @@ namespace Player
         private void ResetDamageRpc()
         {
             _currentInflictedDamage = _defaultDamage;
+        }
+
+        [Rpc(SendTo.ClientsAndHost)]
+        private void PlaySoundRpc(SoundType soundType)
+        {
+            SoundManager.PlaySound(soundType);
         }
         
         public UnityEvent OnEnemyBursted => _onEnemyBursted;
