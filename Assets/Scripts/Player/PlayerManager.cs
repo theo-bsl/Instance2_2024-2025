@@ -128,11 +128,14 @@ namespace Player
                     }
                     else if (itemComponent is FreezeGun)
                     {
-                        _item = Instantiate(item,transform.parent);
+                        _item = Instantiate(item);
+                        item.GetComponent<NetworkObject>().TrySetParent(_gunTransform,false);
                         _item.transform.localPosition = Vector3.zero;
                         _item.transform.up = transform.up;
                         _item.GetComponent<NetworkObject>().Spawn(true);
                         _item.GetComponent<GunFollow>().Target = _gunTransform;
+
+                        itemComponent.OnDo.AddListener(_ => _playerAttack.EjectedSelf(this));
                     }
                 }
             }
@@ -155,8 +158,9 @@ namespace Player
             _playerRotation.Freeze(false);
             _spriteRenderer.color = Color.white;
         }
-  
+
         public NetworkVariable<int> Score => _score;
+        public NetworkVariable<float> DmgTaken => _dmgTaken;
         public NetworkVariable<int> PlayerName => _playerName;
     }
 }
