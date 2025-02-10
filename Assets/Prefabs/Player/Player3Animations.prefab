@@ -192,8 +192,11 @@ MonoBehaviour:
   _comboDamage: 5
   _comboDelay: 2
   _attackDelay: 1
-  _attackSize: 0.5
-  _attackDistance: 0.35
+  _attackSize: 0.25
+  _attackDistance: 0.25
+  _ejecteForce: 10
+  _ejecteMultiplier: 10
+  _maxEjecteForce: 1000
 --- !u!114 &5460954819730498647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,6 +506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e57f06cb5ec042fd81a0a8419467275d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   _playerManager: {fileID: 0}
   _playerMovement: {fileID: 6573687982691566926}
   _playerAttack: {fileID: 7997632398369669264}

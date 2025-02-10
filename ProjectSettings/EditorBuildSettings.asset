@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Feat-MobileInputs.unity
     guid: 458c8713e0357db4dbe5c01373f73a31
+  - enabled: 1
+    path: Assets/Scenes/GoodScenes/MergeGameScene.unity
+    guid: fea51decb7c931547a84fb96d59bb2e3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
