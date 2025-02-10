@@ -11,15 +11,19 @@ namespace Player
         [SerializeField] private float _comboDelay = 2;
         [SerializeField] private float _attackDelay = 1;
         [SerializeField] private float _attackSize = 0.25f;
-        [SerializeField] private float _attackDistance = 0.35f;
-        
+        [SerializeField] private float _attackDistance = 0.25f;
+        [SerializeField] private float _ejecteForce = 10;
+        [SerializeField] private float _ejecteMultiplier = 10;
+        [SerializeField] private float _maxEjecteForce = 1000;
+        [SerializeField] private LayerMask _excludeLayerMask;
+            
         private float _currentInflictedDamage;
         private float _comboTimer;
         private float _fightTimer;
         private bool _isInCombo = false;
         
         private readonly UnityEvent _onEnemyBursted = new();
-
+        
         void Awake()
         {
             _fightTimer = _attackDelay;
@@ -38,6 +42,7 @@ namespace Player
                     _currentInflictedDamage = _defaultDamage;
                 }
             }
+            
             _fightTimer += Time.deltaTime;
         }
 
@@ -64,15 +69,28 @@ namespace Player
                     
                     if (!hit2D.collider.TryGetComponent(out PlayerManager enemy))
                         return;
-                
-                    Debug.DrawRay(transform.position,enemy.transform.position-transform.position,Color.red,5);
                     
                     ComboSystem();
+                    Ejected(enemy);
                     if (enemy.TakeDamage(_currentInflictedDamage))
                         _onEnemyBursted.Invoke();
                     Debug.Log("dmg" + enemy.name);
                 }
             }
+        }
+
+        private void Ejected(PlayerManager enemy)
+        {
+            float ejectedForce = Mathf.Clamp(_ejecteForce + enemy.DmgTaken.Value * _ejecteMultiplier, 0, _maxEjecteForce);
+                
+            enemy.GetComponent<Rigidbody2D>().AddForce(transform.up * ejectedForce);
+        }
+
+        public void EjectedSelf(PlayerManager self)
+        {
+            float ejectedForce = Mathf.Clamp(_ejecteForce + self.DmgTaken.Value, 0, _maxEjecteForce);
+                
+            self.GetComponent<Rigidbody2D>().AddForce(-transform.up * ejectedForce);
         }
 
         private void ComboSystem()
