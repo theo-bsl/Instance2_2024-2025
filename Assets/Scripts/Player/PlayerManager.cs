@@ -19,6 +19,7 @@ namespace Player
         private PlayerMovement _playerMovement;
         private PlayerRotation _playerRotation;
         private PlayerAttack _playerAttack;
+        private PlayerBurst _playerBurst;
         private SpriteRenderer _spriteRenderer;
         
         private GameObject _instantiatedItem;
@@ -31,8 +32,13 @@ namespace Player
             _playerRotation = GetComponent<PlayerRotation>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _playerAttack = GetComponent<PlayerAttack>();
-
-            _playerAttack.OnEnemyBursted.AddListener(() => IncreaseScoreRPC(_burstedScoreEarn));
+            _playerBurst = GetComponent<PlayerBurst>();
+            
+            if(IsServer)
+            {
+                _playerAttack.OnEnemyBursted.AddListener(() => IncreaseScoreRPC(_burstedScoreEarn));
+                _playerBurst.OnEndBurstedEvent.AddListener(ResetDamage);
+            }
 
             if (IsOwner)
                 _playerName = new((int)OwnerClientId);
@@ -44,16 +50,23 @@ namespace Player
             _score.Value += amount;
         }
 
+        public bool TakeDamage(float amount)
+        {
+            TakeDamageRPC(amount);
+            if(_dmgTaken.Value >= _maxDmgTaken)
+                _playerBurst.Burst();
+            return _dmgTaken.Value >= _damageLimit;
+        }
+
         [Rpc(SendTo.Server)]
         private void TakeDamageRPC(float amount)
         {
             _dmgTaken.Value += amount;
         }
 
-        public bool TakeDamage(float amount)
+        private void ResetDamage()
         {
-            TakeDamageRPC(amount);
-            return _dmgTaken.Value >= _damageLimit;
+            _dmgTaken.Value = 0f;
         }
 
         public void UseItem()
