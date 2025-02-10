@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8279313215953853759}
   - component: {fileID: 502191098198810449}
   - component: {fileID: 9027900739240520666}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Farm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3293642974
+  GlobalObjectIdHash: 2515518193
   InScenePlacedSourceGlobalObjectIdHash: 2515518193
   DeferredDespawnTick: 0
   Ownership: 1
