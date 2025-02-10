@@ -12,6 +12,8 @@ public class GetPseudo : MonoBehaviour
     public TMP_Text _warning;
     public TMP_Text _text; 
     private string _apiUrl = "http://192.168.1.226/GetDatas.php";
+    [SerializeField] private string _pseudo;
+    [SerializeField] private GetGlobalScore _globalScore;
 
     void Start()
     {
@@ -44,6 +46,8 @@ public class GetPseudo : MonoBehaviour
             if (!string.IsNullOrEmpty(response.username))
             {
                 _text.text = response.username;
+                _pseudo = response.username;
+                _globalScore.ShowGlobalScore(_pseudo);
             }
             else
             {
