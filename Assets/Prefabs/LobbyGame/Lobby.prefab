@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2671223376043290842}
   - component: {fileID: 2272800176362251141}
   - component: {fileID: 8177818958723835823}
+  - component: {fileID: 218453406519768417}
   m_Layer: 0
   m_Name: Lobby
   m_TagString: Untagged
@@ -79,6 +80,7 @@ MonoBehaviour:
   _timeManager: {fileID: 2671223376043290842}
   _scoreManager: {fileID: 2272800176362251141}
   _spawnManager: {fileID: 8177818958723835823}
+  _lobbySizeManager: {fileID: 218453406519768417}
 --- !u!114 &7433875462028338436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,3 +165,17 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &218453406519768417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2612772361427618410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44532c6fe3424d899541dd7d29ed9073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  _maxPlayerNumber: 10

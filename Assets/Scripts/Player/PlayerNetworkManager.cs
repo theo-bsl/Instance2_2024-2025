@@ -31,7 +31,8 @@ namespace Player
 
         public override void OnNetworkDespawn()
         {
-            SceneManager.LoadScene(0);
+            if (IsOwner)
+                SceneManager.LoadScene(0);
         }
     }
 }
