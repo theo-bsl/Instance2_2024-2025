@@ -8,7 +8,10 @@ namespace Lobby
         public override void OnNetworkSpawn()
         {
             if (!IsServer)
+            {
                 GetComponent<LobbyGame>().enabled = false;
+                GetComponent<LobbySizeManager>().enabled = false;
+            }        
         }
     }
 }
