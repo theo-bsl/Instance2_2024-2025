@@ -172,7 +172,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      turkeyredturn_0: 3390909151124640028
+      turkeyredturn_1: 1611107042431163040
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
