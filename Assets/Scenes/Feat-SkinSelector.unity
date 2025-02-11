@@ -601,6 +601,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2221898044775159601, guid: 4d9fcbd52f28960428ee3a2afa55373a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4731740334208309775, guid: 4d9fcbd52f28960428ee3a2afa55373a, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4731740334208309775, guid: 4d9fcbd52f28960428ee3a2afa55373a, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4731740334208309775, guid: 4d9fcbd52f28960428ee3a2afa55373a, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6672286680470812702, guid: 4d9fcbd52f28960428ee3a2afa55373a, type: 3}
       propertyPath: m_Name
       value: Skin Selection
@@ -683,6 +699,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8034070680653987232, guid: 4d9fcbd52f28960428ee3a2afa55373a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8675083794935381481, guid: 4d9fcbd52f28960428ee3a2afa55373a, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

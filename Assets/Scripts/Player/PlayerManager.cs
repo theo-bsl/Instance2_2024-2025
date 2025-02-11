@@ -33,7 +33,7 @@ namespace Player
         {
             _playerInfos = GetComponent<PlayerInfos>();
             
-            _playerInfos.Name();
+            _playerInfos.Name(_playerShowInfoUI);
             
             
             
@@ -43,7 +43,6 @@ namespace Player
             _playerAttack = GetComponent<PlayerAttack>();
             _playerBurst = GetComponent<PlayerBurst>();
 
-            transform.name = _playerInfos.username;
             _playerShowInfoUI.SetName(_playerInfos.username);
             _playerShowInfoUI.SetDamage(0);
 
