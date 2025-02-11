@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Player;
 using TMPro;
 using Unity.Netcode;
@@ -11,49 +12,45 @@ namespace Leaderboard
         [SerializeField] private List<TextMeshProUGUI> _leaderboardNames;
         [SerializeField] private List<TextMeshProUGUI> _leaderboardScores;
         [SerializeField] private LeaderboardManager _leaderboardManager;
-        
+
         public override void OnNetworkSpawn()
         {
             _leaderboardManager = LeaderboardManager.Instance;
             _leaderboardManager.UpdateLeaderboard.AddListener(UpdateLeaderboard);
         }
 
-        
         private void UpdateLeaderboard(ulong[] leaderboardPlayersList)
         {
             int[] playersScores = new int[leaderboardPlayersList.Length];
+            List<string> playerNames = new();
+
             var clients = NetworkManager.Singleton.ConnectedClients;
-            
+
             for (int i = 0; i < leaderboardPlayersList.Length; i++)
             {
-                var player = clients[leaderboardPlayersList[i]].PlayerObject;
-                var playerManager = TryGetComponentInChildren<PlayerManager>(player.transform);
-                
+                var playerManager = clients[leaderboardPlayersList[i]].PlayerObject.GetComponentInChildren<PlayerManager>();
+
                 playersScores[i] = playerManager.Score.Value;
+
+                // Construct player name as a string (no need for char arrays)
+                string playerName = playerManager.transform.name;
+                playerNames.Add(playerName);
             }
-            ShowLeaderboardRpc(leaderboardPlayersList, playersScores);
+
+            // Maintenant, envoyer chaque nom un par un via l'RPC
+            for (int i = 0; i < playersScores.Length; i++)
+            {
+                ShowLeaderboardRpc(playersScores[i], playerNames[i], i);
+            }
         }
 
         [Rpc(SendTo.ClientsAndHost)]
-        private void ShowLeaderboardRpc(ulong[] leaderboardPlayersList, int[] score)
+        private void ShowLeaderboardRpc(int score, string playerName, int index)
         {
-            for (int i = 0; i < leaderboardPlayersList.Length; i++)
-            {
-                _leaderboardScores[i].SetText(score[i].ToString());
-                _leaderboardNames[i].SetText(leaderboardPlayersList[i] + " :");
-            }
-        }
-        
-        private T TryGetComponentInChildren<T>(Transform playerTransform)
-        {
-            Transform[] transforms = playerTransform.GetComponentsInChildren<Transform>();
-            foreach (Transform childTransform in transforms)
-            {
-                if (childTransform.TryGetComponent(out T component))
-                    return component;
-            }
-
-            return default;
+            // Afficher le score pour ce joueur à l'indice spécifié
+            Debug.Log($"Player Name : {playerName}");
+            _leaderboardNames[index].SetText(playerName);
+            _leaderboardScores[index].SetText(score.ToString());
         }
     }
 }
