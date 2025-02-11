@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Leaderboard;
 using UnityEngine;
 using Unity.Netcode;
@@ -13,6 +14,7 @@ namespace Lobby
         [SerializeField] private ScoreManager _scoreManager;
         [SerializeField] private SpawnManager _spawnManager;
         [SerializeField] private LobbySizeManager _lobbySizeManager;
+        private List<string> _playerNameOnLobby = new List<string>();
         
         public override void OnNetworkSpawn()
         {
