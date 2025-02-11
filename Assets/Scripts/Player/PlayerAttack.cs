@@ -15,7 +15,6 @@ namespace Player
         [SerializeField] private float _ejecteForce = 10;
         [SerializeField] private float _ejecteMultiplier = 10;
         [SerializeField] private float _maxEjecteForce = 1000;
-        [SerializeField] private LayerMask _excludeLayerMask;
             
         private float _currentInflictedDamage;
         private float _comboTimer;
@@ -68,7 +67,7 @@ namespace Player
                         continue;
                     
                     if (!hit2D.collider.TryGetComponent(out PlayerManager enemy))
-                        return;
+                        continue;
                     
                     ComboSystem();
                     Ejected(enemy);

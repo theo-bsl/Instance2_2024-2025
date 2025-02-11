@@ -32,16 +32,13 @@ public class SkinChanger : MonoBehaviour
 
     IEnumerator GetSkin()
     {
-        //UnityWebRequest request = UnityWebRequest.Get("https://192.168.1.226/GetDatas.php");
-        //yield return request.SendWebRequest();
+        UnityWebRequest request = UnityWebRequest.Get("https://192.168.1.226/GetDatas.php");
+        yield return request.SendWebRequest();
 
-        //string json = request.downloadHandler.text;
-        //PlayerInfos playerInfos = JsonUtility.FromJson<PlayerInfos>(json);
+        string json = request.downloadHandler.text;
+        PlayerInfos playerInfos = JsonUtility.FromJson<PlayerInfos>(json);
 
-        //ChangeSkin(playerInfos.skinIndex);
-
-        ChangeSkin(_selection._currentSkin);
-        yield return null;
+        ChangeSkin(playerInfos.skinIndex);
 
     }
 

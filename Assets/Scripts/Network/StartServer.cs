@@ -5,6 +5,7 @@ public class StartServer : MonoBehaviour
 {
     void Start()
     {
+        Debug.Log("LALALALALALALALALALALALALALALl");
         NetworkManager.Singleton.StartServer();
     }
 }
