@@ -57,6 +57,7 @@ namespace Player
             }
 
             _transform.position = spawnPosition;
+            GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
             _burstCoroutine = null;
             EndBurst();
         }
