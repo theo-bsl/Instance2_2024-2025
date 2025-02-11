@@ -1747,10 +1747,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2272800176362251141, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
-      propertyPath: _maxScore
-      value: 10000
-      objectReference: {fileID: 0}
     - target: {fileID: 2612772361427618410, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
       propertyPath: m_Name
       value: Lobby
@@ -1758,10 +1754,6 @@ PrefabInstance:
     - target: {fileID: 5055161718609494328, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1580025816
-      objectReference: {fileID: 0}
-    - target: {fileID: 5055161718609494328, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
-      propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 1423112333
       objectReference: {fileID: 0}
     - target: {fileID: 5495739733237968120, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1807,6 +1799,118 @@ PrefabInstance:
       propertyPath: _leaderboard
       value: 
       objectReference: {fileID: 1351456409}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1511014865}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[1]'
+      value: 
+      objectReference: {fileID: 235128464}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[2]'
+      value: 
+      objectReference: {fileID: 790077958}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[3]'
+      value: 
+      objectReference: {fileID: 489262221}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[4]'
+      value: 
+      objectReference: {fileID: 161901122}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[5]'
+      value: 
+      objectReference: {fileID: 1319981}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[6]'
+      value: 
+      objectReference: {fileID: 348444958}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[7]'
+      value: 
+      objectReference: {fileID: 1253823494}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[8]'
+      value: 
+      objectReference: {fileID: 278082827}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[9]'
+      value: 
+      objectReference: {fileID: 1964780307}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[10]'
+      value: 
+      objectReference: {fileID: 227177835}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[11]'
+      value: 
+      objectReference: {fileID: 771682701}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[12]'
+      value: 
+      objectReference: {fileID: 578351682}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[13]'
+      value: 
+      objectReference: {fileID: 1399157113}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[14]'
+      value: 
+      objectReference: {fileID: 1174185245}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[15]'
+      value: 
+      objectReference: {fileID: 1148812829}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[16]'
+      value: 
+      objectReference: {fileID: 1590027569}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[17]'
+      value: 
+      objectReference: {fileID: 236131209}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[18]'
+      value: 
+      objectReference: {fileID: 1967032137}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[19]'
+      value: 
+      objectReference: {fileID: 521189075}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[20]'
+      value: 
+      objectReference: {fileID: 625916188}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[21]'
+      value: 
+      objectReference: {fileID: 1131877420}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[22]'
+      value: 
+      objectReference: {fileID: 1785730719}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[23]'
+      value: 
+      objectReference: {fileID: 2119735184}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[24]'
+      value: 
+      objectReference: {fileID: 814406309}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[25]'
+      value: 
+      objectReference: {fileID: 782299611}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[26]'
+      value: 
+      objectReference: {fileID: 1806692969}
+    - target: {fileID: 8177818958723835823, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: '_spawnPoints.Array.data[27]'
+      value: 
+      objectReference: {fileID: 1399046126}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

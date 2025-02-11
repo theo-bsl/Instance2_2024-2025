@@ -11,6 +11,7 @@ namespace Lobby
         [SerializeField] private LeaderboardManager _leaderboard;
         [SerializeField] private TimeManager _timeManager;
         [SerializeField] private ScoreManager _scoreManager;
+        [SerializeField] private SpawnManager _spawnManager;
         
         public override void OnNetworkSpawn()
         {
@@ -26,6 +27,7 @@ namespace Lobby
         {
             _leaderboard.AddNewPlayerID(id);
             _scoreManager.ManageNewPlayer(id);
+            _spawnManager.ManageNewPlayer(id);
         }
 
         private void CloseLobby()
