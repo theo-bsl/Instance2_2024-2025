@@ -128,7 +128,7 @@ namespace Player
 
         private IEnumerator ModifyDamageCoroutine(float damageModifier, float duration)
         {
-            _playerAttack.ModifyDamage(damageModifier);
+            _playerAttack.ModifyDamageRpc(damageModifier);
             yield return new WaitForSeconds(duration);
             _playerAttack.ResetDamage();
         }
@@ -137,6 +137,12 @@ namespace Player
         {
             if (other.TryGetComponent(out ItemDispenser itemDispenser))
             {
+                if (_item)
+                {
+                    itemDispenser.Despawn();
+                    return;
+                }
+                
                 GameObject item = itemDispenser.GetItem();
                 _itemName = item.name;
 
@@ -152,6 +158,7 @@ namespace Player
                         {
                             (float speedModifier, float duration) = ((float, float))obj;
                             ModifySpeed(speedModifier, duration);
+                            itemComponent.OnDo.RemoveAllListeners();
                         });
                     }
                     else if (itemComponent is DamageModifier)
@@ -161,6 +168,7 @@ namespace Player
                         {
                             (float damageModifier, float duration) = ((float, float))obj;
                             ModifyDamage(damageModifier, duration);
+                            itemComponent.OnDo.RemoveAllListeners();
                         });
                     }
                     else if (itemComponent is FreezeGun)
@@ -173,6 +181,7 @@ namespace Player
                         _item.GetComponent<GunFollow>().Target = _gunTransform;
 
                         itemComponent.OnDo.AddListener(_ => _playerAttack.EjectedSelf(this));
+                        itemComponent.OnDo.RemoveAllListeners();
                     }
                 }
             }

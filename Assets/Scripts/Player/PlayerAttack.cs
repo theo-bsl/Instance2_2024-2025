@@ -16,7 +16,7 @@ namespace Player
         [SerializeField] private float _ejecteMultiplier = 10;
         [SerializeField] private float _maxEjecteForce = 1000;
             
-        private float _currentInflictedDamage;
+        [SerializeField] private float _currentInflictedDamage;
         private float _comboTimer;
         private float _fightTimer;
         private bool _isInCombo = false;
@@ -106,8 +106,9 @@ namespace Player
         }
 
         [Rpc(SendTo.Server)]
-        private void ModifyDamageRpc(float damageModifier)
+        public void ModifyDamageRpc(float damageModifier)
         {
+            Debug.Log($"damage modifier: {damageModifier}");
             _currentInflictedDamage += damageModifier * _currentInflictedDamage;
         }
 

@@ -16,18 +16,32 @@ namespace Lobby
         [SerializeField] private SpawnManager _spawnManager;
         [SerializeField] private LobbySizeManager _lobbySizeManager;
         private List<string> _playerNameOnLobby = new List<string>();
+        
+        private string _playerName;
 
         public override void OnNetworkSpawn()
         {
             if (IsServer)
+            {
                 NetworkManager.Singleton.OnClientConnectedCallback += ManageNewPlayer;
+                NetworkManager.Singleton.OnClientDisconnectCallback += ManageDisconnectPlayer;
+            }
             else
+            {
                 enabled = false;
+                return;
+            }
+
             _scoreManager.OnScoreMax.AddListener(CloseLobby);
             _timeManager.OnTimerFinished.AddListener(CloseLobby);
         }
-        
-        
+
+        private void ManageDisconnectPlayer(ulong obj)
+        {
+            _playerNameOnLobby.Remove(_playerName);
+            Debug.Log($"Player Disconnected: {_playerName} line 43");
+        }
+
 
         private void ManageNewPlayer(ulong id)
         {
@@ -35,9 +49,11 @@ namespace Lobby
             {
                 var r = NetworkManager.Singleton.ConnectedClients[id].PlayerObject;
                 PlayerManager player = r.GetComponentInChildren<PlayerManager>();
-                if (_playerNameOnLobby.Contains(player.transform.name))
+                _playerName = player.transform.name;
+                if (_playerNameOnLobby.Contains(_playerName))
                 {
-                    NetworkManager.Singleton.DisconnectClient(id);
+                    ManageDisconnectPlayer(id);
+                    Debug.Log($"Player Disconnected: {_playerName} line 57");
                     return;
                 }
 
@@ -47,6 +63,7 @@ namespace Lobby
                 _spawnManager.ManageNewPlayer(id);
             }
         }
+
 
         private void CloseLobby()
         {

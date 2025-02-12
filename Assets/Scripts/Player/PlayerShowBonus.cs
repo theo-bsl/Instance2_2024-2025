@@ -26,6 +26,10 @@ namespace Player
         [Rpc(SendTo.ClientsAndHost)]
         private void ShowCurrentItemRpc(string itemName)
         {
+            if (itemName == "FreezeGun")
+            {
+                _currentItem.SetActive(false);
+            }
             if (itemName == "SpeedUp")
             {
                 _currentItem.SetActive(true);
