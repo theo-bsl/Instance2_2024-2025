@@ -16,7 +16,7 @@ public class GetGlobalScore : MonoBehaviour
 
     private IEnumerator GetUsername(string Username)
     {
-        _apiUrl = $"http://localhost/Test/GlobalScore.php?username={Username}";
+        _apiUrl = $"http://192.168.1.226/Test/GlobalScore.php?username={Username}";
 
         UnityWebRequest request = UnityWebRequest.Get(_apiUrl);
         yield return request.SendWebRequest();

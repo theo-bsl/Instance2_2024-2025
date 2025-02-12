@@ -9,7 +9,6 @@ using UnityEngine.Networking;
 
 public class GetPseudo : MonoBehaviour
 {
-    public TMP_Text _warning;
     public TMP_Text _text; 
     private string _apiUrl = "http://192.168.1.226/GetDatas.php";
     [SerializeField] private string _pseudo;
@@ -47,12 +46,12 @@ public class GetPseudo : MonoBehaviour
             {
                 _text.text = response.username;
                 _pseudo = response.username;
-                _globalScore.ShowGlobalScore(_pseudo);
             }
             else
             {
-                _text.text = "User not logged in";
+                _text.text = "";
             }
+            _globalScore.ShowGlobalScore(_pseudo);
         }
         else
         {

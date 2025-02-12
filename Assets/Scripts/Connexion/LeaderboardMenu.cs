@@ -10,7 +10,7 @@ public class LeaderboardMenu : MonoBehaviour
 
     void Start()
     {
-        _apiUrl = $"http://localhost/Test/GetScores.php";
+        _apiUrl = $"http://192.168.1.226/LeaderboardMenu.php";
         StartCoroutine(GetUsername());
     }
 
@@ -41,10 +41,6 @@ public class LeaderboardMenu : MonoBehaviour
                     Debug.Log(score.username);
                     _topPlayers.text += $"{score._rank}.  {score.username}  {score._score} \n";
                 }
-            }
-            else
-            {
-                _topPlayers.text = "Any score registered yet";
             }
         }
         else
