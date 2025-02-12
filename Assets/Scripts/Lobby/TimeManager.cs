@@ -24,8 +24,10 @@ namespace Lobby
         {
             if(IsServer)
             {
-                if (_gameCloseLobbyTime >= 0)
+                if (_gameCloseLobbyTime > 0)
                     _gameCloseLobbyTime -= Time.deltaTime;
+                else
+                    _onTimerFinished.Invoke();
                 _minutes = Mathf.FloorToInt(_gameCloseLobbyTime / 60f);
                 _seconds = Mathf.FloorToInt(_gameCloseLobbyTime - _minutes * 60f);
                 _onUpdateUI.Invoke(_minutes, _seconds);

@@ -18,7 +18,7 @@ namespace Lobby
         [Rpc(SendTo.ClientsAndHost)]
         private void UpdateUIRpc(int minutes, int seconds)
         {
-            _timeText.SetText(minutes + " : " + seconds);
+            _timeText.SetText(minutes + " : " + seconds.ToString("00"));
         }
 
     }

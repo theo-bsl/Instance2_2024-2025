@@ -1432,6 +1432,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lobby
       objectReference: {fileID: 0}
+    - target: {fileID: 2671223376043290842, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
+      propertyPath: _gameCloseLobbyTime
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 5055161718609494328, guid: 1d8021eb2f7f6454eb5e5f05b1a880b1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 319202479
