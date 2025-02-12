@@ -8,6 +8,7 @@ public class MenuButton : MonoBehaviour
     public void OnClicked()
     {
         _onButtonPressed.Invoke();
+        Debug.Log("Pressed");
     }
 
     public UnityEvent OnButtonPressed => _onButtonPressed;

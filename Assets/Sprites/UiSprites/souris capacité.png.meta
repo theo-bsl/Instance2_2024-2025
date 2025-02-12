@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "souris capacit\xE9_0": 8250030377753786213
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
