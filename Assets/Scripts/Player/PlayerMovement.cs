@@ -46,6 +46,7 @@ namespace Player
         [Rpc(SendTo.Server)]
         private void ModifySpeedRPC(float speedModifier)
         {
+            Debug.Log($"speedModifier: {speedModifier}");
             _playerSpeed += _playerSpeed * speedModifier;
         }
 

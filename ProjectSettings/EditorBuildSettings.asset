@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/GoodScenes/MainMenu.unity
     guid: 3b3487a54bee03c42bc59dfb066d992f
   - enabled: 1
-    path: Assets/Scenes/GoodScenes/GameScene.unity
-    guid: c999b649f08f8614f91fb6e7ebadcd36
+    path: Assets/Scenes/Feat-HudInGame.unity
+    guid: 2dfe9cd9b0969f34f8d19482827dfa84
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
