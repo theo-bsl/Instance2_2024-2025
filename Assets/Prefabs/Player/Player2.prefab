@@ -249,6 +249,11 @@ MonoBehaviour:
   _comboDamage: 5
   _comboDelay: 2
   _attackDelay: 1
+  _attackSize: 0.25
+  _attackDistance: 0.25
+  _ejecteForce: 10
+  _ejecteMultiplier: 10
+  _maxEjecteForce: 1000
 --- !u!50 &6753135648076167122
 Rigidbody2D:
   serializedVersion: 5
@@ -288,7 +293,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44c38243ced00724e89537837a999bb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerSpeed: 10
+  ShowTopMostFoldoutHeaderGroup: 1
+  _defaultPlayerSpeed: 10
 --- !u!114 &9116961200816187866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,9 +308,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  _score: 0
+  _damageLimit: 150
+  _burstedScoreEarn: 150
+  _score:
+    m_InternalValue: 0
   _dmgTaken:
     m_InternalValue: 0
+  _maxDmgTaken: 100
+  _gunTransform: {fileID: 0}
+  _playerShowInfoUI: {fileID: 0}
+  _item: {fileID: 0}
 --- !u!114 &4488516623559964457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,6 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b5e7cff5e684eb69ee3f88ba8b037aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   cam: {fileID: 7797621823870762356}
 --- !u!61 &2340802837394995046
 BoxCollider2D:
@@ -426,9 +440,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2229890807782324110}
+  - component: {fileID: 2502085496811996034}
   - component: {fileID: 8916697462771748551}
   - component: {fileID: 7656275528115736940}
-  - component: {fileID: 2502085496811996034}
   - component: {fileID: 6754867429130047405}
   m_Layer: 0
   m_Name: Player2
@@ -454,6 +468,31 @@ Transform:
   - {fileID: 6371859180130242843}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2502085496811996034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9162741999924990083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2708798897
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &8916697462771748551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,9 +505,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e57f06cb5ec042fd81a0a8419467275d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  _playerManager: {fileID: 0}
   _playerMovement: {fileID: 8901117511904463585}
   _playerAttack: {fileID: 4660990567277551716}
   _playerRotation: {fileID: 4488516623559964457}
+  _playerAnimator: {fileID: 0}
 --- !u!114 &7656275528115736940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,36 +584,15 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 4ec35190-d0fa-442d-b414-08093fe1ad6f
     m_ActionName: 'Player/MousePosition[/Mouse/position]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e082ba7f-7f3d-487b-ac0f-325abcbc63ad
+    m_ActionName: 'Player/UseItem[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &2502085496811996034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9162741999924990083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2708798897
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
 --- !u!114 &6754867429130047405
 MonoBehaviour:
   m_ObjectHideFlags: 0
