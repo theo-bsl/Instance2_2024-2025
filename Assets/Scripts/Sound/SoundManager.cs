@@ -5,10 +5,11 @@ using Random = UnityEngine.Random;
 
 namespace Sound
 {
-    [RequireComponent(typeof(AudioSource)), ExecuteInEditMode]
+    [RequireComponent(typeof(AudioSource))/*, ExecuteInEditMode*/]
     public class SoundManager : MonoBehaviour
     {
         [SerializeField] private SoundList[] _sounds;
+        [SerializeField] private SoundList2[] _sounds2;
         [SerializeField] private AudioMixer _audioMixer;
         
         private static SoundManager _instance;
@@ -22,8 +23,11 @@ namespace Sound
         private void Awake()
         {
             if (!_instance)
+            {
                 _instance = this;
-            else
+                DontDestroyOnLoad(this);
+            }
+            else 
                 Destroy(gameObject);
         }
 
@@ -43,31 +47,58 @@ namespace Sound
             AudioSource.PlayClipAtPoint(clip, position, volume);
         }
         
-        public void SetVolume(GlobalSoundType soundType, float volume)
+        public void SetVolume(ulong playerId, GlobalSoundType soundType, float volume)
         {
             float dBVolume = Mathf.Log10(volume) * 20;
             switch (soundType)
             {
                 case GlobalSoundType.Main:
                     _audioMixer.SetFloat(_mainVolumeStr, dBVolume);
+                    PlayerPrefs.SetFloat(_mainVolumeStr + playerId, dBVolume);
                     break;
                 case GlobalSoundType.SFX:
                     _audioMixer.SetFloat(_sfxVolumeStr, dBVolume);
+                    PlayerPrefs.SetFloat(_sfxVolumeStr + playerId, dBVolume);
                     break;
                 case GlobalSoundType.Music:
                     _audioMixer.SetFloat(_musicVolumeStr, dBVolume);
+                    PlayerPrefs.SetFloat(_musicVolumeStr + playerId, dBVolume);
                     break;
                 case GlobalSoundType.UI:
                     _audioMixer.SetFloat(_uiVolumeStr, dBVolume);
+                    PlayerPrefs.SetFloat(_uiVolumeStr + playerId, dBVolume);
                     break;
             }
+        }
+
+        public float GetVolume(ulong playerId, GlobalSoundType soundType)
+        {
+            float volume;
+            
+            switch (soundType)
+            {
+                case GlobalSoundType.Main:
+                    _audioMixer.GetFloat(_mainVolumeStr + playerId, out volume);
+                    return volume;
+                case GlobalSoundType.SFX:
+                    _audioMixer.GetFloat(_sfxVolumeStr + playerId, out volume);
+                    return volume;
+                case GlobalSoundType.Music:
+                    _audioMixer.GetFloat(_musicVolumeStr + playerId, out volume);
+                    return volume;
+                case GlobalSoundType.UI:
+                    _audioMixer.GetFloat(_uiVolumeStr + playerId, out volume);
+                    return volume;
+            }
+            
+            return 0f;
         }
         
         public static SoundManager Instance => _instance;
         public SoundList[] Sounds => _sounds;
         public AudioSource AudioSource => _audioSource;
         
-#if UNITY_EDITOR
+/*#if UNITY_EDITOR
         private void OnEnable()
         {
             string[] names = Enum.GetNames(typeof(SoundType));
@@ -76,7 +107,7 @@ namespace Sound
             for (var i = 0; i < _sounds.Length; i++)
                 _sounds[i].name = names[i];
         }
-#endif
+#endif*/
     }
 
     public enum GlobalSoundType
@@ -98,5 +129,12 @@ namespace Sound
         [SerializeField] private AudioClip[] sounds;
         
         public AudioClip[] Sounds => sounds;
+    }
+
+    [Serializable]
+    public struct SoundList2
+    {
+        public SoundType soundType;
+        public AudioClip[] sounds;
     }
 }
