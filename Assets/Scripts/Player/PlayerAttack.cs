@@ -75,9 +75,9 @@ namespace Player
                     if (enemy.TakeDamage(_currentInflictedDamage))
                         _onEnemyBursted.Invoke();
                     Debug.Log("dmg" + enemy.name);
-                }
                 
-                PlaySoundRpc(SoundType.Hit);
+                    PlaySoundAtPositionRpc(SoundType.Hit, hit2D.point);
+                }
             }
         }
 
@@ -128,7 +128,13 @@ namespace Player
         [Rpc(SendTo.ClientsAndHost)]
         private void PlaySoundRpc(SoundType soundType)
         {
-            SoundManager.PlaySound(soundType);
+            SoundManager.Instance.PlaySound(soundType);
+        }
+        
+        [Rpc(SendTo.ClientsAndHost)]
+        private void PlaySoundAtPositionRpc(SoundType soundType, Vector3 position)
+        {
+            SoundManager.Instance.PlaySoundAtPosition(soundType, position);
         }
         
         public UnityEvent OnEnemyBursted => _onEnemyBursted;

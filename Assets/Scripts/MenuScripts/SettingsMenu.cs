@@ -12,17 +12,17 @@ namespace MenuScripts
         [SerializeField] private Slider _musicSlider;
         [SerializeField] private Slider _uiSlider;
 
-        public void Awake()
+        public void Start()
         {
-            _mainSlider .onValueChanged.AddListener(volume => SoundManager.Instance.SetVolume(NetworkObjectId, GlobalSoundType.Main, volume));
-            _sfxSlider  .onValueChanged.AddListener(volume => SoundManager.Instance.SetVolume(NetworkObjectId, GlobalSoundType.SFX, volume));
-            _musicSlider.onValueChanged.AddListener(volume => SoundManager.Instance.SetVolume(NetworkObjectId, GlobalSoundType.Music, volume));
-            _uiSlider   .onValueChanged.AddListener(volume => SoundManager.Instance.SetVolume(NetworkObjectId, GlobalSoundType.UI, volume));
+            _mainSlider .onValueChanged.AddListener(volume => SoundManager.Instance.SetVolume(GlobalSoundType.Main, volume));
+            _sfxSlider  .onValueChanged.AddListener(volume => SoundManager.Instance.SetVolume(GlobalSoundType.SFX, volume));
+            _musicSlider.onValueChanged.AddListener(volume => SoundManager.Instance.SetVolume(GlobalSoundType.Music, volume));
+            _uiSlider   .onValueChanged.AddListener(volume => SoundManager.Instance.SetVolume(GlobalSoundType.UI, volume));
             
-            _mainSlider.value  = SoundManager.Instance.GetVolume(NetworkObjectId, GlobalSoundType.Main);
-            _sfxSlider.value   = SoundManager.Instance.GetVolume(NetworkObjectId, GlobalSoundType.SFX);
-            _musicSlider.value = SoundManager.Instance.GetVolume(NetworkObjectId, GlobalSoundType.Music);
-            _uiSlider.value    = SoundManager.Instance.GetVolume(NetworkObjectId, GlobalSoundType.UI);
+            _mainSlider .value = SoundManager.Instance.GetGlobalVolume(GlobalSoundType.Main);
+            _sfxSlider  .value = SoundManager.Instance.GetGlobalVolume(GlobalSoundType.SFX);
+            _musicSlider.value = SoundManager.Instance.GetGlobalVolume(GlobalSoundType.Music);
+            _uiSlider   .value = SoundManager.Instance.GetGlobalVolume(GlobalSoundType.UI);
         }
     }
 }

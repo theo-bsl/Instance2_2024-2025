@@ -10,10 +10,10 @@ namespace Sound
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (playAtPoint)
-                SoundManager.PlaySoundAtPosition(sound, animator.transform.position, volume);
+            /*if (playAtPoint)
+                SoundManager.Instance.PlaySoundAtPosition(sound, animator.transform.position, volume);
             else 
-                SoundManager.PlaySound(sound, volume);
+                SoundManager.Instance.PlaySound(sound, volume);*/
         }
     }
 }

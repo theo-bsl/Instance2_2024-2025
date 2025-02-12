@@ -6,7 +6,7 @@ namespace Sound
     {
         public void PlaySound()
         {
-            SoundManager.PlaySound(SoundType.Footstep);
+            /*SoundManager.Instance.PlaySound(SoundType.Footstep);*/
         }
     }
 }

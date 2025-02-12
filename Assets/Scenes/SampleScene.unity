@@ -313,10 +313,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1668630770}
   m_HandleRect: {fileID: 1717249538}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.0001
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -867,8 +867,8 @@ GameObject:
   - component: {fileID: 602462882}
   - component: {fileID: 602462885}
   - component: {fileID: 602462884}
-  - component: {fileID: 602462883}
   - component: {fileID: 602462886}
+  - component: {fileID: 602462883}
   m_Layer: 5
   m_Name: BackgroundPanel
   m_TagString: Untagged
@@ -1150,10 +1150,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1961669318}
   m_HandleRect: {fileID: 373530623}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.0001
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1315,10 +1315,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1455996551}
   m_HandleRect: {fileID: 824877409}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.0001
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2035,10 +2035,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 169627343}
   m_HandleRect: {fileID: 332460191}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.0001
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2624,34 +2624,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sounds:
-  - name: Freeze
-    sounds: []
-  - name: SpeedUp
-    sounds: []
-  - name: SpeedDown
-    sounds: []
-  - name: DamageUp
-    sounds: []
-  - name: DamageDown
-    sounds: []
-  - name: Hit
-    sounds: []
-  - name: Bust
-    sounds: []
-  - name: Footstep
-    sounds: []
-  - name: StartGame
-    sounds: []
-  - name: EndGame
-    sounds: []
-  _sounds2:
   - soundType: 0
+    globalSoundType: 1
     sounds:
-    - {fileID: 0}
-  - soundType: 1
-    sounds:
-    - {fileID: 0}
-  _audioMixer: {fileID: 0}
+    - {fileID: 8300000, guid: a0e914b1733b2c5428278ffb753d2c20, type: 3}
+  _audioMixer: {fileID: 24100000, guid: ad2dd0a612873714392348cdd6a1e21c, type: 2}
 --- !u!82 &1938414368
 AudioSource:
   m_ObjectHideFlags: 0
