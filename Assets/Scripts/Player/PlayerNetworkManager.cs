@@ -1,6 +1,7 @@
 ﻿using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace Player
 {
@@ -26,6 +27,12 @@ namespace Player
                 GetComponentInChildren<PlayerAttack>().enabled = false;
                 GetComponentInChildren<Collider2D>().enabled = false;
             }
+        }
+
+        public override void OnNetworkDespawn()
+        {
+            if (IsOwner)
+                SceneManager.LoadScene(0);
         }
     }
 }

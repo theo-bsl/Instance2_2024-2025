@@ -5,10 +5,10 @@ namespace Farm
 {
     public class FarmEarnPoints : MonoBehaviour
     {
-        [SerializeField] private PlayerManager _playerEarningPoints;
         [SerializeField] private float _earningDelay;
         [SerializeField] private int _pointsAmount;
         private float _timer;
+        private PlayerManager _playerEarningPoints;
 
         private void FixedUpdate()
         {
@@ -18,7 +18,7 @@ namespace Farm
                 if (_timer > _earningDelay)
                 {
                     _timer = 0;
-                    _playerEarningPoints?.IncreaseScore(_pointsAmount);
+                    _playerEarningPoints?.IncreaseScoreRPC(_pointsAmount);
                 }
             }
             else

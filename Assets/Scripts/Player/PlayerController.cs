@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : NetworkBehaviour
     {
         [SerializeField] private PlayerManager _playerManager;
         [SerializeField] private PlayerMovement _playerMovement;

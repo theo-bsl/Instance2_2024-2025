@@ -5,45 +5,81 @@ using UnityEngine;
 
 namespace Player
 {
+    
     public class PlayerManager : NetworkBehaviour
     {
+        [SerializeField] private int _damageLimit = 150;
+        [SerializeField] private int _burstedScoreEarn = 150;
         [SerializeField] private NetworkVariable<int> _score = new(0);
         [SerializeField] private NetworkVariable<float> _dmgTaken = new(0);
         [SerializeField] private float _maxDmgTaken = 100f;
         [SerializeField] private Transform _gunTransform;
-
+        [SerializeField] private PlayerShowInfoUI _playerShowInfoUI;
+        
         [SerializeField] private GameObject _item;
         private PlayerMovement _playerMovement;
         private PlayerRotation _playerRotation;
         private PlayerAttack _playerAttack;
+        private PlayerBurst _playerBurst;
         private SpriteRenderer _spriteRenderer;
+        private PlayerInfos _playerInfos;
         
-        private GameObject _instanciatedItem;
+        private GameObject _instantiatedItem;
 
+        //private NetworkVariable<char[]> _playerName = new("bob".ToCharArray());
+        private NetworkList<char> _playerName = new();
+        
         public override void OnNetworkSpawn()
         {
+            _playerInfos = GetComponent<PlayerInfos>();
+            
+            _playerInfos.Name(_playerShowInfoUI);
+            
+            
+            
             _playerMovement = GetComponent<PlayerMovement>();
             _playerRotation = GetComponent<PlayerRotation>();
-            _playerAttack = GetComponent<PlayerAttack>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
-        }
+            _playerAttack = GetComponent<PlayerAttack>();
+            _playerBurst = GetComponent<PlayerBurst>();
 
-        public void IncreaseScore(int amount)
+            _playerShowInfoUI.SetName(_playerInfos.username);
+            _playerShowInfoUI.SetDamage(0);
+
+
+            //_playerName = _playerInfos.username;
+            
+            if(IsServer)
+            {
+                _playerAttack.OnEnemyBursted.AddListener(() => IncreaseScoreRPC(_burstedScoreEarn));
+                _playerBurst.OnEndBurstedEvent.AddListener(ResetDamage);
+            }
+        }        
+        
+        [Rpc(SendTo.Server)]
+        public void IncreaseScoreRPC(int amount)
         {
             _score.Value += amount;
         }
 
-        [Rpc(SendTo.Server)]
-        public void TakeDamageRPC(float amount)
+        public bool TakeDamage(float amount)
         {
-            Debug.Log(amount);
-            _dmgTaken.Value += amount;
-            //_dmgTaken += amount;
+            TakeDamageRPC(amount);
+            if(_dmgTaken.Value >= _maxDmgTaken)
+                _playerBurst.Burst();
+            _playerShowInfoUI.SetDamage(_dmgTaken.Value);
+            return _dmgTaken.Value >= _damageLimit;
+        }
 
-            // if (_dmgTaken >= 100)
-            // {
-            //     transform.position = Vector3.zero;
-            // }
+        [Rpc(SendTo.Server)]
+        private void TakeDamageRPC(float amount)
+        {
+            _dmgTaken.Value += amount;
+        }
+
+        private void ResetDamage()
+        {
+            _dmgTaken.Value = 0f;
         }
 
         public void UseItem()
@@ -118,11 +154,14 @@ namespace Player
                     }
                     else if (itemComponent is FreezeGun)
                     {
-                        _item = Instantiate(item,transform.parent);
+                        _item = Instantiate(item);
+                        item.GetComponent<NetworkObject>().TrySetParent(_gunTransform,false);
                         _item.transform.localPosition = Vector3.zero;
                         _item.transform.up = transform.up;
                         _item.GetComponent<NetworkObject>().Spawn(true);
                         _item.GetComponent<GunFollow>().Target = _gunTransform;
+
+                        itemComponent.OnDo.AddListener(_ => _playerAttack.EjectedSelf(this));
                     }
                 }
             }
@@ -145,5 +184,9 @@ namespace Player
             _playerRotation.Freeze(false);
             _spriteRenderer.color = Color.white;
         }
+
+        public NetworkVariable<int> Score => _score;
+        public NetworkVariable<float> DmgTaken => _dmgTaken;
+        public NetworkList<char> PlayerName => _playerName;
     }
 }

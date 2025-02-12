@@ -1,5 +1,6 @@
 ﻿using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Player
 {
@@ -9,12 +10,19 @@ namespace Player
         [SerializeField] private int _comboDamage = 5;
         [SerializeField] private float _comboDelay = 2;
         [SerializeField] private float _attackDelay = 1;
-        
+        [SerializeField] private float _attackSize = 0.25f;
+        [SerializeField] private float _attackDistance = 0.25f;
+        [SerializeField] private float _ejecteForce = 10;
+        [SerializeField] private float _ejecteMultiplier = 10;
+        [SerializeField] private float _maxEjecteForce = 1000;
+            
         private float _currentInflictedDamage;
         private float _comboTimer;
         private float _fightTimer;
         private bool _isInCombo = false;
-
+        
+        private readonly UnityEvent _onEnemyBursted = new();
+        
         void Awake()
         {
             _fightTimer = _attackDelay;
@@ -33,6 +41,7 @@ namespace Player
                     _currentInflictedDamage = _defaultDamage;
                 }
             }
+            
             _fightTimer += Time.deltaTime;
         }
 
@@ -49,7 +58,8 @@ namespace Player
                 _fightTimer = 0;
                 
                 float angle = Vector2.Angle(Vector2.up, transform.up);
-                RaycastHit2D[] castAll = Physics2D.BoxCastAll(transform.position, Vector2.one, angle,transform.up);
+                RaycastHit2D[] castAll = Physics2D.BoxCastAll(transform.position, Vector2.one * _attackSize, angle,transform.up, _attackDistance);
+                
                 
                 foreach (var hit2D in castAll)
                 {
@@ -57,14 +67,29 @@ namespace Player
                         continue;
                     
                     if (!hit2D.collider.TryGetComponent(out PlayerManager enemy))
-                        return;
-                
-
+                        continue;
+                    
                     ComboSystem();
-                    enemy.TakeDamageRPC(_currentInflictedDamage);
+                    Ejected(enemy);
+                    if (enemy.TakeDamage(_currentInflictedDamage))
+                        _onEnemyBursted.Invoke();
                     Debug.Log("dmg" + enemy.name);
                 }
             }
+        }
+
+        private void Ejected(PlayerManager enemy)
+        {
+            float ejectedForce = Mathf.Clamp(_ejecteForce + enemy.DmgTaken.Value * _ejecteMultiplier, 0, _maxEjecteForce);
+                
+            enemy.GetComponent<Rigidbody2D>().AddForce(transform.up * ejectedForce);
+        }
+
+        public void EjectedSelf(PlayerManager self)
+        {
+            float ejectedForce = Mathf.Clamp(_ejecteForce + self.DmgTaken.Value, 0, _maxEjecteForce);
+                
+            self.GetComponent<Rigidbody2D>().AddForce(-transform.up * ejectedForce);
         }
 
         private void ComboSystem()
@@ -74,7 +99,7 @@ namespace Player
             _comboTimer = 0;
             _currentInflictedDamage += _comboDamage;
         }
-
+        
         public void ModifyDamage(float damageModifier)
         {
             ModifyDamageRpc(damageModifier);
@@ -96,5 +121,7 @@ namespace Player
         {
             _currentInflictedDamage = _defaultDamage;
         }
+        
+        public UnityEvent OnEnemyBursted => _onEnemyBursted;
     }
 }
