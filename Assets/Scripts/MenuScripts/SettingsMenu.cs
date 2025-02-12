@@ -14,12 +14,6 @@ namespace MenuScripts
 
         public void Awake()
         {
-            if (!IsOwner)
-            {
-                enabled = false;
-                return;
-            }
-            
             _mainSlider .onValueChanged.AddListener(volume => SoundManager.Instance.SetVolume(NetworkObjectId, GlobalSoundType.Main, volume));
             _sfxSlider  .onValueChanged.AddListener(volume => SoundManager.Instance.SetVolume(NetworkObjectId, GlobalSoundType.SFX, volume));
             _musicSlider.onValueChanged.AddListener(volume => SoundManager.Instance.SetVolume(NetworkObjectId, GlobalSoundType.Music, volume));

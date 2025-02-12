@@ -5,14 +5,11 @@ using Random = UnityEngine.Random;
 
 namespace Sound
 {
-    [RequireComponent(typeof(AudioSource))/*, ExecuteInEditMode*/]
-    public class SoundManager : MonoBehaviour
+    [RequireComponent(typeof(AudioSource))]
+    public class SoundManager : SingletonPersistent<SoundManager>
     {
         [SerializeField] private SoundList[] _sounds;
-        [SerializeField] private SoundList2[] _sounds2;
         [SerializeField] private AudioMixer _audioMixer;
-        
-        private static SoundManager _instance;
         
         private AudioSource _audioSource;
         private readonly string _mainVolumeStr = "Master";
@@ -20,30 +17,37 @@ namespace Sound
         private readonly string _musicVolumeStr = "Music";
         private readonly string _uiVolumeStr = "UI";
 
-        private void Awake()
-        {
-            if (!_instance)
-            {
-                _instance = this;
-                DontDestroyOnLoad(this);
-            }
-            else 
-                Destroy(gameObject);
-        }
-
         public static void PlaySound(SoundType sound, float volume = 1.0f)
         {
-            var audioClips = Instance.Sounds[(int)sound].Sounds;
-            var clip = audioClips[Random.Range(0, audioClips.Length)];
+            AudioClip[] audioClips = Array.Empty<AudioClip>();
+
+            foreach (var soundList in Instance.Sounds)
+            {
+                if (soundList.soundType == sound)
+                {
+                    audioClips = soundList.sounds;
+                    break;
+                }
+            }
             
+            AudioClip clip = audioClips[Random.Range(0, audioClips.Length)];
             Instance.AudioSource.PlayOneShot(clip, volume);
         }
 
         public static void PlaySoundAtPosition(SoundType sound, Vector3 position, float volume = 1.0f)
         {
-            var audioClips = Instance.Sounds[(int)sound].Sounds;
-            var clip = audioClips[Random.Range(0, audioClips.Length)];
+            AudioClip[] audioClips = Array.Empty<AudioClip>();
+
+            foreach (var soundList in Instance.Sounds)
+            {
+                if (soundList.soundType == sound)
+                {
+                    audioClips = soundList.sounds;
+                    break;
+                }
+            }
             
+            AudioClip clip = audioClips[Random.Range(0, audioClips.Length)];
             AudioSource.PlayClipAtPoint(clip, position, volume);
         }
         
@@ -94,20 +98,8 @@ namespace Sound
             return 0f;
         }
         
-        public static SoundManager Instance => _instance;
         public SoundList[] Sounds => _sounds;
         public AudioSource AudioSource => _audioSource;
-        
-/*#if UNITY_EDITOR
-        private void OnEnable()
-        {
-            string[] names = Enum.GetNames(typeof(SoundType));
-            Array.Resize(ref _sounds, names.Length);
-            
-            for (var i = 0; i < _sounds.Length; i++)
-                _sounds[i].name = names[i];
-        }
-#endif*/
     }
 
     public enum GlobalSoundType
@@ -124,15 +116,6 @@ namespace Sound
 
     [Serializable]
     public struct SoundList
-    {
-        [HideInInspector] public string name;
-        [SerializeField] private AudioClip[] sounds;
-        
-        public AudioClip[] Sounds => sounds;
-    }
-
-    [Serializable]
-    public struct SoundList2
     {
         public SoundType soundType;
         public AudioClip[] sounds;
