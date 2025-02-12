@@ -14,34 +14,46 @@ namespace Player
         [SerializeField] private NetworkVariable<float> _dmgTaken = new(0);
         [SerializeField] private float _maxDmgTaken = 100f;
         [SerializeField] private Transform _gunTransform;
-
+        [SerializeField] private PlayerShowInfoUI _playerShowInfoUI;
+        
         [SerializeField] private GameObject _item;
         private PlayerMovement _playerMovement;
         private PlayerRotation _playerRotation;
         private PlayerAttack _playerAttack;
         private PlayerBurst _playerBurst;
         private SpriteRenderer _spriteRenderer;
+        private PlayerInfos _playerInfos;
         
         private GameObject _instantiatedItem;
 
-        private NetworkVariable<int> _playerName = new(0);
+        //private NetworkVariable<char[]> _playerName = new("bob".ToCharArray());
+        private NetworkList<char> _playerName = new();
         
         public override void OnNetworkSpawn()
         {
+            _playerInfos = GetComponent<PlayerInfos>();
+            
+            _playerInfos.Name(_playerShowInfoUI);
+            
+            
+            
             _playerMovement = GetComponent<PlayerMovement>();
             _playerRotation = GetComponent<PlayerRotation>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _playerAttack = GetComponent<PlayerAttack>();
             _playerBurst = GetComponent<PlayerBurst>();
+
+            _playerShowInfoUI.SetName(_playerInfos.username);
+            _playerShowInfoUI.SetDamage(0);
+
+
+            //_playerName = _playerInfos.username;
             
             if(IsServer)
             {
                 _playerAttack.OnEnemyBursted.AddListener(() => IncreaseScoreRPC(_burstedScoreEarn));
                 _playerBurst.OnEndBurstedEvent.AddListener(ResetDamage);
             }
-
-            if (IsOwner)
-                _playerName = new((int)OwnerClientId);
         }        
         
         [Rpc(SendTo.Server)]
@@ -55,6 +67,7 @@ namespace Player
             TakeDamageRPC(amount);
             if(_dmgTaken.Value >= _maxDmgTaken)
                 _playerBurst.Burst();
+            _playerShowInfoUI.SetDamage(_dmgTaken.Value);
             return _dmgTaken.Value >= _damageLimit;
         }
 
@@ -174,6 +187,6 @@ namespace Player
 
         public NetworkVariable<int> Score => _score;
         public NetworkVariable<float> DmgTaken => _dmgTaken;
-        public NetworkVariable<int> PlayerName => _playerName;
+        public NetworkList<char> PlayerName => _playerName;
     }
 }
