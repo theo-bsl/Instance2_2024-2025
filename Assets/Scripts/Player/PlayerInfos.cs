@@ -1,4 +1,5 @@
 using System.Collections;
+using Player;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -12,16 +13,20 @@ public class PlayerInfos : MonoBehaviour
 
     private string _apiUrl = "http://192.168.1.226/GetDatas.php";
 
+    private PlayerShowInfoUI _playerShowInfoUI;
+
     private void Start()
     {
         //StartCoroutine(GetPlayerInfos());
 
     }
 
-    public void Name()
+    public void Name(PlayerShowInfoUI playerShowInfoUI)
     {
         // username = "player" + index;
         // index++;
+        
+        _playerShowInfoUI = playerShowInfoUI;
         StartCoroutine(GetPlayerInfos());
     }
 
@@ -38,6 +43,8 @@ public class PlayerInfos : MonoBehaviour
             if (!string.IsNullOrEmpty(response.username))
             {
                 Debug.Log("Get Players Infos successfully");
+                transform.name = response.username;
+                _playerShowInfoUI.SetName(response.username);
             }
             else
             {
