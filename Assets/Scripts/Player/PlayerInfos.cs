@@ -25,9 +25,12 @@ public class PlayerInfos : MonoBehaviour
     {
         // username = "player" + index;
         // index++;
+        // transform.name = username;
+        // _playerShowInfoUI.SetName(username);
+
         
-        _playerShowInfoUI = playerShowInfoUI;
-        StartCoroutine(GetPlayerInfos());
+        // _playerShowInfoUI = playerShowInfoUI;
+        // StartCoroutine(GetPlayerInfos());
     }
 
     private IEnumerator GetPlayerInfos()

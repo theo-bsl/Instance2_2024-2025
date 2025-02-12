@@ -12,18 +12,25 @@ namespace Items
         public override void OnNetworkSpawn()
         {
             _transform = transform;
-            
+
             if (!IsServer)
                 enabled = false;
         }
 
         private void Update()
         {
-            _target.GetPositionAndRotation(out Vector3 pos, out Quaternion rot);
-            _transform.position = pos;
-            _transform.rotation = rot;
+            if (_target != null)
+            {
+                _target.GetPositionAndRotation(out Vector3 pos, out Quaternion rot);
+                _transform.position = pos;
+                _transform.rotation = rot;
+            }
         }
 
-        public Transform Target { get => _target; set => _target = value; }
+        public Transform Target
+        {
+            get => _target;
+            set => _target = value;
+        }
     }
 }

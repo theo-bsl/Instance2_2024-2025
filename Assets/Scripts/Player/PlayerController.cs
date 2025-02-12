@@ -26,7 +26,6 @@ namespace Player
         public void OnAttack(InputAction.CallbackContext context)
         {
             _playerAttack.Attack();
-            PlayAnimationRPC("isAttacking", true);
             if (context.canceled)
             {
                 PlayAnimationRPC("isAttacking", false);

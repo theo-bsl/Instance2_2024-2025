@@ -60,6 +60,7 @@ namespace Player
                 float angle = Vector2.Angle(Vector2.up, transform.up);
                 RaycastHit2D[] castAll = Physics2D.BoxCastAll(transform.position, Vector2.one * _attackSize, angle,transform.up, _attackDistance);
                 
+                GetComponentInParent<PlayerController>().PlayAnimationRPC("isAttacking", true);
                 
                 foreach (var hit2D in castAll)
                 {

@@ -23,6 +23,7 @@ namespace Player
         private PlayerBurst _playerBurst;
         private SpriteRenderer _spriteRenderer;
         private PlayerInfos _playerInfos;
+        private Animator _animator;
         
         private GameObject _instantiatedItem;
 
@@ -34,16 +35,17 @@ namespace Player
             _playerInfos = GetComponent<PlayerInfos>();
             
             _playerInfos.Name(_playerShowInfoUI);
-            
-            
-            
+
+
+            _animator = GetComponent<Animator>();
             _playerMovement = GetComponent<PlayerMovement>();
             _playerRotation = GetComponent<PlayerRotation>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _playerAttack = GetComponent<PlayerAttack>();
             _playerBurst = GetComponent<PlayerBurst>();
 
-            _playerShowInfoUI.SetName(_playerInfos.username);
+            transform.name = GetPseudo._usernameResponse.username;
+            _playerShowInfoUI.SetName(GetPseudo._usernameResponse.username);
             _playerShowInfoUI.SetDamage(0);
 
 
@@ -65,6 +67,7 @@ namespace Player
         public bool TakeDamage(float amount)
         {
             TakeDamageRPC(amount);
+            _animator.SetTrigger("TakeDamage");
             if(_dmgTaken.Value >= _maxDmgTaken)
                 _playerBurst.Burst();
             _playerShowInfoUI.SetDamage(_dmgTaken.Value);
@@ -96,6 +99,10 @@ namespace Player
             foreach (Item item in _item.GetComponents<Item>())
             {
                 item?.Do();
+                if (item is FreezeGun)
+                {
+                    _animator.SetBool("hasGun", false);
+                }
             }
             
             _item = null;
@@ -155,12 +162,13 @@ namespace Player
                     else if (itemComponent is FreezeGun)
                     {
                         _item = Instantiate(item);
-                        item.GetComponent<NetworkObject>().TrySetParent(_gunTransform,false);
+                        _item.GetComponent<GunFollow>().Target = _gunTransform;
                         _item.transform.localPosition = Vector3.zero;
                         _item.transform.up = transform.up;
                         _item.GetComponent<NetworkObject>().Spawn(true);
-                        _item.GetComponent<GunFollow>().Target = _gunTransform;
-
+                        
+                        _animator.SetBool("hasGun", true);
+                        
                         itemComponent.OnDo.AddListener(_ => _playerAttack.EjectedSelf(this));
                     }
                 }
