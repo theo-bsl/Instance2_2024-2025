@@ -33,14 +33,12 @@ public class MobileHandling : MonoBehaviour
 
     void Start()
     {
-        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-        {
+        
             _mobileInputCanvas.SetActive(true);
             if (Input.deviceOrientation == DeviceOrientation.Portrait || Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown)
             {
                 _orientationWarning.SetActive(true);
             }
-        }
     }
 
     private void ComputeResolution()
