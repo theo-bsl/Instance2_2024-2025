@@ -48,7 +48,7 @@ public class GetPseudo : MonoBehaviour
             {
                 _text.text = _usernameResponse.username;
                 _pseudo = _usernameResponse.username;
-                _globalScore.ShowGlobalScore(_pseudo);
+                //_globalScore.ShowGlobalScore(_pseudo);
             }
             else
             {

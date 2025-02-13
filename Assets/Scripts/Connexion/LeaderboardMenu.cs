@@ -10,8 +10,8 @@ public class LeaderboardMenu : MonoBehaviour
 
     void Start()
     {
-        _apiUrl = $"http://192.168.1.226/GetScore.php";
-        StartCoroutine(GetUsername());
+        _apiUrl = $"http://192.168.1.226/LeaderboardMenu.php";
+        //StartCoroutine(GetUsername());
     }
 
     public void ShowTopPlayers()

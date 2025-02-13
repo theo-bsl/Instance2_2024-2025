@@ -613,6 +613,22 @@ PrefabInstance:
       propertyPath: _globalScore
       value: 
       objectReference: {fileID: 359030671}
+    - target: {fileID: 5527000898819439185, guid: f38e3681d2be45a4eb4dd69715bbe549, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873539527012015813, guid: f38e3681d2be45a4eb4dd69715bbe549, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 359030673}
+    - target: {fileID: 5873539527012015813, guid: f38e3681d2be45a4eb4dd69715bbe549, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873539527012015813, guid: f38e3681d2be45a4eb4dd69715bbe549, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: StartClient, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 6866600578795137822, guid: f38e3681d2be45a4eb4dd69715bbe549, type: 3}
       propertyPath: m_Name
       value: Menu
@@ -621,6 +637,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1276469762508940677, guid: f38e3681d2be45a4eb4dd69715bbe549, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 359030673}
     - targetCorrespondingSourceObject: {fileID: 6838289786017002691, guid: f38e3681d2be45a4eb4dd69715bbe549, type: 3}
       insertIndex: -1
       addedObject: {fileID: 359030671}
@@ -648,12 +667,30 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 359030670}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b52dd6cf54579264ab9614ef7b4c419e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 359030669}
+--- !u!1 &359030672 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1276469762508940677, guid: f38e3681d2be45a4eb4dd69715bbe549, type: 3}
+  m_PrefabInstance: {fileID: 359030668}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &359030673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359030672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 221c3837231d4ab4db7c50b305857323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverIp: 192.168.1.226
 --- !u!1 &370498735
 GameObject:
   m_ObjectHideFlags: 0
