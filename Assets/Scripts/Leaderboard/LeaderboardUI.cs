@@ -11,7 +11,7 @@ namespace Leaderboard
     {
         [SerializeField] private List<TextMeshProUGUI> _leaderboardNames;
         [SerializeField] private List<TextMeshProUGUI> _leaderboardScores;
-        [SerializeField] private LeaderboardManager _leaderboardManager;
+        private LeaderboardManager _leaderboardManager;
 
         public override void OnNetworkSpawn()
         {

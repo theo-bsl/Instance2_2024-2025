@@ -9,6 +9,7 @@ namespace Lobby
     {
         [SerializeField] private List<Transform> _spawnPoints;
         private List<Transform> _openSpawnPoints;
+        private Dictionary<ulong, PlayerBurst> _spawnManagerPlayer = new();
 
         private void Awake()
         {
@@ -19,13 +20,15 @@ namespace Lobby
         {
             var client = NetworkManager.Singleton.ConnectedClients[id].PlayerObject;
             SetPlayerPosition(client);
-            client.GetComponentInChildren<PlayerBurst>().OnBurstedEvent.AddListener(RespawnPlayer);
+            var pBurst = client.GetComponentInChildren<PlayerBurst>();
+            pBurst.OnBurstedEvent.AddListener(RespawnPlayer);
+            _spawnManagerPlayer.Add(id, pBurst);
         }
         
         public void RemoveDisconnectedPlayer(ulong id)
         {
-            var client = NetworkManager.Singleton.ConnectedClients[id].PlayerObject;
-            client.GetComponentInChildren<PlayerBurst>().OnBurstedEvent.RemoveListener(RespawnPlayer);
+            _spawnManagerPlayer[id].GetComponentInChildren<PlayerBurst>().OnBurstedEvent.RemoveListener(RespawnPlayer);
+            _spawnManagerPlayer.Remove(id);
         }
 
         private void SetPlayerPosition(NetworkObject client)
