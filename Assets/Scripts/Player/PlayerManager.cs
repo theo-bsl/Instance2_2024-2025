@@ -2,6 +2,7 @@ using System.Collections;
 using Items;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Player
 {
@@ -17,6 +18,7 @@ namespace Player
         [SerializeField] private PlayerShowInfoUI _playerShowInfoUI;
         
         [SerializeField] private GameObject _item;
+        private string _itemName;
         private PlayerMovement _playerMovement;
         private PlayerRotation _playerRotation;
         private PlayerAttack _playerAttack;
@@ -24,6 +26,11 @@ namespace Player
         private SpriteRenderer _spriteRenderer;
         private PlayerInfos _playerInfos;
         private Animator _animator;
+        
+        private readonly UnityEvent<string> _onUseItem = new();
+        private readonly UnityEvent<string> _onEndItem = new();
+        private readonly UnityEvent<string> _onGetItem = new();
+        
         
         private GameObject _instantiatedItem;
 
@@ -48,7 +55,6 @@ namespace Player
             _playerShowInfoUI.SetName(GetPseudo._usernameResponse.username);
             _playerShowInfoUI.SetDamage(0);
 
-
             //_playerName = _playerInfos.username;
             
             if(IsServer)
@@ -56,8 +62,15 @@ namespace Player
                 _playerAttack.OnEnemyBursted.AddListener(() => IncreaseScoreRPC(_burstedScoreEarn));
                 _playerBurst.OnEndBurstedEvent.AddListener(ResetDamage);
             }
-        }        
-        
+
+            NetworkManager.Singleton.OnClientDisconnectCallback += OnDestroyPlayer;
+        }
+
+        private void OnDestroyPlayer(ulong obj)
+        {
+            OnDestroyed?.Invoke();
+        }
+
         [Rpc(SendTo.Server)]
         public void IncreaseScoreRPC(int amount)
         {
@@ -95,6 +108,7 @@ namespace Player
         {
             if (!_item)
                 return;
+            _onUseItem.Invoke(_itemName);
             
             foreach (Item item in _item.GetComponents<Item>())
             {
@@ -117,6 +131,7 @@ namespace Player
         {
             _playerMovement.ModifySpeed(speedModifier);
             yield return new WaitForSeconds(duration);
+            _onEndItem.Invoke(_itemName);
             _playerMovement.ResetSpeed();
         }
 
@@ -127,7 +142,7 @@ namespace Player
 
         private IEnumerator ModifyDamageCoroutine(float damageModifier, float duration)
         {
-            _playerAttack.ModifyDamage(damageModifier);
+            _playerAttack.ModifyDamageRpc(damageModifier);
             yield return new WaitForSeconds(duration);
             _playerAttack.ResetDamage();
         }
@@ -136,8 +151,17 @@ namespace Player
         {
             if (other.TryGetComponent(out ItemDispenser itemDispenser))
             {
+                if (_item)
+                {
+                    itemDispenser.Despawn();
+                    return;
+                }
+                
                 GameObject item = itemDispenser.GetItem();
+                _itemName = item.name;
+
                 itemDispenser.Despawn();
+                _onGetItem.Invoke(_itemName);
 
                 foreach (Item itemComponent in item.GetComponents<Item>())
                 {
@@ -148,6 +172,7 @@ namespace Player
                         {
                             (float speedModifier, float duration) = ((float, float))obj;
                             ModifySpeed(speedModifier, duration);
+                            itemComponent.OnDo.RemoveAllListeners();
                         });
                     }
                     else if (itemComponent is DamageModifier)
@@ -157,6 +182,7 @@ namespace Player
                         {
                             (float damageModifier, float duration) = ((float, float))obj;
                             ModifyDamage(damageModifier, duration);
+                            itemComponent.OnDo.RemoveAllListeners();
                         });
                     }
                     else if (itemComponent is FreezeGun)
@@ -170,6 +196,7 @@ namespace Player
                         _animator.SetBool("hasGun", true);
                         
                         itemComponent.OnDo.AddListener(_ => _playerAttack.EjectedSelf(this));
+                        itemComponent.OnDo.RemoveAllListeners();
                     }
                 }
             }
@@ -196,5 +223,11 @@ namespace Player
         public NetworkVariable<int> Score => _score;
         public NetworkVariable<float> DmgTaken => _dmgTaken;
         public NetworkList<char> PlayerName => _playerName;
+        public UnityEvent<string> OnUseItem => _onUseItem;
+        public UnityEvent<string> OnEndItem => _onEndItem;
+        public UnityEvent<string> OnGetItem => _onGetItem;
+        
+        public event System.Action OnDestroyed;
+
     }
 }
