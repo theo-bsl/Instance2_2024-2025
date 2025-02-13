@@ -10,7 +10,6 @@ using UnityEngine.Networking;
 
 public class GetPseudo : MonoBehaviour
 {
-    public TMP_Text _warning;
     public TMP_Text _text; 
     private string _apiUrl = "http://192.168.1.226/GetDatas.php";
     [SerializeField] private string _pseudo;
@@ -37,17 +36,6 @@ public class GetPseudo : MonoBehaviour
     {
         UnityWebRequest request = UnityWebRequest.Get(_apiUrl);
         yield return request.SendWebRequest();
-
-        //if(request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
-        //{
-        //    Debug.LogError("Erreur de connexion " + request.error);
-        //}
-        //else
-        //{
-        //    string json = request.downloadHandler.text;
-        //    UsernameResponse usernameResponse = JsonUtility.FromJson<UsernameResponse>(json);
-        //    _text.text = usernameResponse.username;
-        //}
 
          if (request.result == UnityWebRequest.Result.Success)
         {
