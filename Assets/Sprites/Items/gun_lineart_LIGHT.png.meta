@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      gun_lineart_LIGHT_0: -1541689799365512227
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
