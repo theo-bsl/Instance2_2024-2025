@@ -49,7 +49,7 @@ namespace Leaderboard
         {
             // Afficher le score pour ce joueur à l'indice spécifié
             Debug.Log($"Player Name : {playerName}");
-            _leaderboardNames[index].SetText(playerName);
+            _leaderboardNames[index].SetText($"{playerName} :");
             _leaderboardScores[index].SetText(score.ToString());
         }
     }

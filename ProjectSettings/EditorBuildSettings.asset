@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GoodScenes/GameScene.unity
     guid: 110d9b13cf9eb46488d37b6e1e9f410d
+  - enabled: 1
+    path: Assets/Scenes/Feat-HideLeaderboard.unity
+    guid: 0fb056e0bd53c3443b523bcefcfb1ded
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
