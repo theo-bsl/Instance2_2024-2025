@@ -42,7 +42,7 @@ namespace Player
             _playerInfos = GetComponent<PlayerInfos>();
             
             _playerInfos.Name(_playerShowInfoUI);
-
+            UpdatePlayerName(transform.name);
 
             _animator = GetComponent<Animator>();
             _playerMovement = GetComponent<PlayerMovement>();
@@ -51,9 +51,9 @@ namespace Player
             _playerAttack = GetComponent<PlayerAttack>();
             _playerBurst = GetComponent<PlayerBurst>();
 
-            transform.name = GetPseudo._usernameResponse.username;
-            _playerShowInfoUI.SetName(GetPseudo._usernameResponse.username);
             _playerShowInfoUI.SetDamage(0);
+            /*transform.name = GetPseudo._usernameResponse.username;
+            _playerShowInfoUI.SetName(GetPseudo._usernameResponse.username);*/
 
             //_playerName = _playerInfos.username;
             
@@ -86,16 +86,29 @@ namespace Player
             _playerShowInfoUI.SetDamage(_dmgTaken.Value);
             return _dmgTaken.Value >= _damageLimit;
         }
-
+        
         [Rpc(SendTo.Server)]
         private void TakeDamageRPC(float amount)
         {
             _dmgTaken.Value += amount;
+            UpdatePlayerDamageUIRpc(_dmgTaken.Value);
+        }
+
+        [Rpc(SendTo.ClientsAndHost)]
+        private void UpdatePlayerDamageUIRpc(float damage)
+        {
+            _playerShowInfoUI.SetDamage(damage);
+        }
+
+        private void UpdatePlayerName(string playerName)
+        {
+            _playerShowInfoUI.SetName(playerName);
         }
 
         private void ResetDamage()
         {
             _dmgTaken.Value = 0f;
+            UpdatePlayerDamageUIRpc(_dmgTaken.Value);
         }
 
         public void UseItem()
