@@ -14,6 +14,16 @@ public class GetPseudo : MonoBehaviour
     private string _apiUrl = "http://192.168.1.226/GetDatas.php";
     [SerializeField] private string _pseudo;
     [SerializeField] private GetGlobalScore _globalScore;
+    
+    [System.Serializable]
+    public class UsernameResponse
+    {
+        public string username;
+        public int id;
+        public int skinChosen;
+    }
+
+    public static UsernameResponse _usernameResponse;
 
     void Start()
     {
@@ -41,12 +51,12 @@ public class GetPseudo : MonoBehaviour
             _text.text = Application.absoluteURL;
             string jsonResponse = request.downloadHandler.text;
 
-            UsernameResponse response = JsonUtility.FromJson<UsernameResponse>(jsonResponse);
+            _usernameResponse = JsonUtility.FromJson<UsernameResponse>(jsonResponse);
 
-            if (!string.IsNullOrEmpty(response.username))
+            if (!string.IsNullOrEmpty(_usernameResponse.username))
             {
-                _text.text = response.username;
-                _pseudo = response.username;
+                _text.text = _usernameResponse.username;
+                _pseudo = _usernameResponse.username;
                 _globalScore.ShowGlobalScore(_pseudo);
             }
             else
@@ -59,13 +69,5 @@ public class GetPseudo : MonoBehaviour
             _text.text = "Error fetching username";
         }
 
-    }
-
-    [System.Serializable]
-    class UsernameResponse
-    {
-        public string username;
-        public int id;
-        public int skinChosen;
     }
 }
