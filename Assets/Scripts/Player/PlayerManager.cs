@@ -60,8 +60,15 @@ namespace Player
                 _playerAttack.OnEnemyBursted.AddListener(() => IncreaseScoreRPC(_burstedScoreEarn));
                 _playerBurst.OnEndBurstedEvent.AddListener(ResetDamage);
             }
-        }        
-        
+
+            NetworkManager.Singleton.OnClientDisconnectCallback += OnDestroyPlayer;
+        }
+
+        private void OnDestroyPlayer(ulong obj)
+        {
+            OnDestroyed?.Invoke();
+        }
+
         [Rpc(SendTo.Server)]
         public void IncreaseScoreRPC(int amount)
         {
@@ -211,5 +218,8 @@ namespace Player
         public UnityEvent<string> OnUseItem => _onUseItem;
         public UnityEvent<string> OnEndItem => _onEndItem;
         public UnityEvent<string> OnGetItem => _onGetItem;
+        
+        public event System.Action OnDestroyed;
+
     }
 }

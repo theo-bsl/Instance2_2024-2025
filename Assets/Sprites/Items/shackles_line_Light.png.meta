@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      shackles_line_Light_0: 7223399191281659581
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

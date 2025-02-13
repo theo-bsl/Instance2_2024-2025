@@ -18,16 +18,16 @@ public class PlayerInfos : MonoBehaviour
     private void Start()
     {
         //StartCoroutine(GetPlayerInfos());
-
     }
 
     public void Name(PlayerShowInfoUI playerShowInfoUI)
     {
-        // username = "player" + index;
-        // index++;
-        
-        _playerShowInfoUI = playerShowInfoUI;
-        StartCoroutine(GetPlayerInfos());
+        username = "player" + index;
+        index++;
+        transform.name = username;
+
+        // _playerShowInfoUI = playerShowInfoUI;
+        // StartCoroutine(GetPlayerInfos());
     }
 
     private IEnumerator GetPlayerInfos()
@@ -55,6 +55,5 @@ public class PlayerInfos : MonoBehaviour
         {
             Debug.Log("Error fetching username");
         }
-
     }
 }
