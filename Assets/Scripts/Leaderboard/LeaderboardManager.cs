@@ -42,6 +42,23 @@ namespace Leaderboard
             manager.Score.OnValueChanged += (_, _) => LeaderBoardUpdate();
             LeaderBoardUpdate();
         }
+        
+        public void RemoveDisconnectedPlayer(ulong playerID)
+        {
+            RemoveDisconnectedPlayerRpc(playerID);
+        }
+
+        [Rpc(SendTo.Server)]
+        private void RemoveDisconnectedPlayerRpc(ulong playerID)
+        {
+            var player = NetworkManager.Singleton.ConnectedClients[playerID].PlayerObject;
+            PlayerManager manager = TryGetComponentInChildren<PlayerManager>(player.transform);
+            
+            if (_allPlayers.Contains(manager))
+                _allPlayers.Remove(manager);
+            
+            manager.Score.OnValueChanged = null;
+        }
 
         private void LeaderBoardUpdate()
         {
