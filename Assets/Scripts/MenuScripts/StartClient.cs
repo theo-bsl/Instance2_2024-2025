@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class StartClient : MonoBehaviour
 {
+    [SerializeField] private String serverIp = "127.0.0.1";
+    
     public void StartGame()
     {
             SceneManager.sceneLoaded += onSceneLoaded;
@@ -16,7 +18,7 @@ public class StartClient : MonoBehaviour
     private void onSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         SceneManager.sceneLoaded -= onSceneLoaded;
-        NetworkManager.Singleton.GetComponent<UnityTransport>().ConnectionData.Address = "127.0.0.1";
+        NetworkManager.Singleton.GetComponent<UnityTransport>().ConnectionData.Address = serverIp;
         NetworkManager.Singleton.StartClient();
     }
 }

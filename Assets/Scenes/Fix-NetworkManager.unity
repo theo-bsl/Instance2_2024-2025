@@ -1132,10 +1132,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1129827183071243701, guid: 427ba8d85c132bf4e8fbb383e61c1034, type: 3}
-      propertyPath: NetworkConfig.PlayerPrefab
-      value: 
-      objectReference: {fileID: 3586110316325530466, guid: ae8997cc6f946194ebfb9a31aee74259, type: 3}
     - target: {fileID: 3568547204100494692, guid: 427ba8d85c132bf4e8fbb383e61c1034, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1176,18 +1172,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4736418278086523570, guid: 427ba8d85c132bf4e8fbb383e61c1034, type: 3}
-      propertyPath: m_UseWebSockets
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4736418278086523570, guid: 427ba8d85c132bf4e8fbb383e61c1034, type: 3}
-      propertyPath: m_MaxPacketQueueSize
-      value: 1024
-      objectReference: {fileID: 0}
-    - target: {fileID: 4736418278086523570, guid: 427ba8d85c132bf4e8fbb383e61c1034, type: 3}
-      propertyPath: ConnectionData.ServerListenAddress
-      value: 127.0.0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 6045384328225042225, guid: 427ba8d85c132bf4e8fbb383e61c1034, type: 3}
       propertyPath: m_Name
       value: NetworkManager
@@ -1195,58 +1179,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6045384328225042225, guid: 427ba8d85c132bf4e8fbb383e61c1034, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1649752191}
-    - targetCorrespondingSourceObject: {fileID: 6045384328225042225, guid: 427ba8d85c132bf4e8fbb383e61c1034, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1649752192}
-    - targetCorrespondingSourceObject: {fileID: 6045384328225042225, guid: 427ba8d85c132bf4e8fbb383e61c1034, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1649752200}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 427ba8d85c132bf4e8fbb383e61c1034, type: 3}
---- !u!1 &1649752190 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6045384328225042225, guid: 427ba8d85c132bf4e8fbb383e61c1034, type: 3}
-  m_PrefabInstance: {fileID: 1649752189}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1649752191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1649752190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 647d849d10dcc064faa6a8906dfa574f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1649752192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1649752190}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52e598d9d70d79b428b049478eedcb1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1649752200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1649752190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ab7d669a16e9294182feb94d17688d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1699434819
 GameObject:
   m_ObjectHideFlags: 0

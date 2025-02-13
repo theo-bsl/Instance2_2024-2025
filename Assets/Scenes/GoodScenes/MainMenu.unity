@@ -3592,6 +3592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 221c3837231d4ab4db7c50b305857323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serverIp: 192.168.1.226
 --- !u!1 &1809509750
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
@@ -14,6 +15,8 @@ public class GetPseudo : MonoBehaviour
     private string _apiUrl = "http://192.168.1.226/GetDatas.php";
     [SerializeField] private string _pseudo;
     [SerializeField] private GetGlobalScore _globalScore;
+    
+    private static int index; 
     
     [System.Serializable]
     public class UsernameResponse
@@ -62,6 +65,8 @@ public class GetPseudo : MonoBehaviour
             else
             {
                 _text.text = "User not logged in";
+                _usernameResponse.username = "Player " + " " + index;
+                index++;
             }
         }
         else

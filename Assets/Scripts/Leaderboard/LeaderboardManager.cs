@@ -16,6 +16,8 @@ namespace Leaderboard
         private readonly UnityEvent<ulong[]> _updateLeaderboard = new();
         
         private static LeaderboardManager _leaderboardManager;
+        
+        private Dictionary<ulong, PlayerManager> _leaderboardPlayers = new();
 
         public void Awake()
         {
@@ -35,6 +37,7 @@ namespace Leaderboard
         {
             var player = NetworkManager.Singleton.ConnectedClients[playerID].PlayerObject;
             PlayerManager manager = TryGetComponentInChildren<PlayerManager>(player.transform);
+            _leaderboardPlayers.Add(playerID, manager);
             
             if (!_allPlayers.Contains(manager))
                 _allPlayers.Add(manager);
@@ -51,13 +54,12 @@ namespace Leaderboard
         [Rpc(SendTo.Server)]
         private void RemoveDisconnectedPlayerRpc(ulong playerID)
         {
-            var player = NetworkManager.Singleton.ConnectedClients[playerID].PlayerObject;
-            PlayerManager manager = TryGetComponentInChildren<PlayerManager>(player.transform);
             
-            if (_allPlayers.Contains(manager))
-                _allPlayers.Remove(manager);
+            if (_allPlayers.Contains(_leaderboardPlayers[playerID]))
+                _allPlayers.Remove(_leaderboardPlayers[playerID]);
             
-            manager.Score.OnValueChanged = null;
+            _leaderboardPlayers[playerID].Score.OnValueChanged = null;
+            _leaderboardPlayers.Remove(playerID);
         }
 
         private void LeaderBoardUpdate()
