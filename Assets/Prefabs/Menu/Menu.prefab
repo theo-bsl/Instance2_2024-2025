@@ -3242,7 +3242,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -70}
+  m_AnchoredPosition: {x: 0, y: -53}
   m_SizeDelta: {x: 160, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &614917552729625259
@@ -7041,7 +7041,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PSEUDO
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fbc8a61eab90e434c8f6cba123c176a9, type: 2}
   m_sharedMaterial: {fileID: -5584077850767485708, guid: fbc8a61eab90e434c8f6cba123c176a9, type: 2}
@@ -7124,7 +7124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5670d993640ea54b822e20ee3b88b25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _warning: {fileID: 0}
   _text: {fileID: 3118711803800610768}
   _pseudo: 
   _globalScore: {fileID: 0}
@@ -8490,8 +8489,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -193.33688}
-  m_SizeDelta: {x: 250, y: 62.0716}
+  m_AnchoredPosition: {x: 0, y: -183.27158}
+  m_SizeDelta: {x: 250, y: 82.2022}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6788590264575939145
 CanvasRenderer:
@@ -8699,8 +8698,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.0287, y: 75}
-  m_SizeDelta: {x: 406.1727, y: 100}
+  m_AnchoredPosition: {x: 5.4198, y: 72}
+  m_SizeDelta: {x: 417.0123, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4899809548222829722
 CanvasRenderer:
@@ -10462,7 +10461,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Pseudo \nScore"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fbc8a61eab90e434c8f6cba123c176a9, type: 2}
   m_sharedMaterial: {fileID: -5584077850767485708, guid: fbc8a61eab90e434c8f6cba123c176a9, type: 2}
