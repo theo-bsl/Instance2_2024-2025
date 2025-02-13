@@ -26,6 +26,9 @@ namespace Player
         [Rpc(SendTo.ClientsAndHost)]
         private void ShowCurrentItemRpc(string itemName)
         {
+            if(!IsOwner)
+                return;
+            
             if (itemName == "FreezeGun")
             {
                 _currentItem.SetActive(false);
@@ -46,6 +49,9 @@ namespace Player
         [Rpc(SendTo.ClientsAndHost)]
         private void ShowItemRpc(string itemName)
         {
+            if(!IsOwner)
+                return;
+            
             _currentItem.SetActive(false);
             if (itemName == "SpeedUp")
             {
@@ -65,6 +71,9 @@ namespace Player
         [Rpc(SendTo.ClientsAndHost)]
         private void HideItemRpc(string itemName)
         {
+            if(!IsOwner)
+                return;
+            
             if (itemName == "SpeedUp")
                 _showBonus.SetActive(false);
 
