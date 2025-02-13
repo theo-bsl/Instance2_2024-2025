@@ -38,6 +38,8 @@ namespace Lobby
 
         private void ManageDisconnectPlayer(ulong obj)
         {
+            _leaderboard.RemoveDisconnectedPlayer(obj);
+            _spawnManager.RemoveDisconnectedPlayer(obj);
             _playerNameOnLobby.Remove(_playerName);
             Debug.Log($"Player Disconnected: {_playerName} line 43");
         }

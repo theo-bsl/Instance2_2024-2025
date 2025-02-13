@@ -21,6 +21,12 @@ namespace Lobby
             SetPlayerPosition(client);
             client.GetComponentInChildren<PlayerBurst>().OnBurstedEvent.AddListener(RespawnPlayer);
         }
+        
+        public void RemoveDisconnectedPlayer(ulong id)
+        {
+            var client = NetworkManager.Singleton.ConnectedClients[id].PlayerObject;
+            client.GetComponentInChildren<PlayerBurst>().OnBurstedEvent.RemoveListener(RespawnPlayer);
+        }
 
         private void SetPlayerPosition(NetworkObject client)
         {
