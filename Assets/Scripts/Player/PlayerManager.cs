@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Items;
 using Unity.Netcode;
@@ -6,7 +7,6 @@ using UnityEngine.Events;
 
 namespace Player
 {
-    
     public class PlayerManager : NetworkBehaviour
     {
         [SerializeField] private int _damageLimit = 150;
@@ -16,7 +16,7 @@ namespace Player
         [SerializeField] private float _maxDmgTaken = 100f;
         [SerializeField] private Transform _gunTransform;
         [SerializeField] private PlayerShowInfoUI _playerShowInfoUI;
-        
+
         [SerializeField] private GameObject _item;
         private string _itemName;
         private PlayerMovement _playerMovement;
@@ -26,21 +26,23 @@ namespace Player
         private SpriteRenderer _spriteRenderer;
         private PlayerInfos _playerInfos;
         private Animator _animator;
-        
+
         private readonly UnityEvent<string> _onUseItem = new();
         private readonly UnityEvent<string> _onEndItem = new();
         private readonly UnityEvent<string> _onGetItem = new();
-        
-        
+
+
+        private static int _index;
+
         private GameObject _instantiatedItem;
 
         //private NetworkVariable<char[]> _playerName = new("bob".ToCharArray());
         private NetworkList<char> _playerName = new();
-        
+
         public override void OnNetworkSpawn()
         {
             _playerInfos = GetComponent<PlayerInfos>();
-            
+
             _playerInfos.Name(_playerShowInfoUI);
             UpdatePlayerName(transform.name);
 
@@ -51,13 +53,25 @@ namespace Player
             _playerAttack = GetComponent<PlayerAttack>();
             _playerBurst = GetComponent<PlayerBurst>();
 
+            if (GetPseudo._usernameResponse != null && GetPseudo._usernameResponse.username != null)
+            {
+                transform.name = GetPseudo._usernameResponse.username;
+                _playerShowInfoUI.SetName(GetPseudo._usernameResponse.username);
+            }
+            else
+            {
+                transform.name = "Player " + _index;
+                _playerShowInfoUI.SetName(transform.name);
+                _index++;
+            }
+
             _playerShowInfoUI.SetDamage(0);
             /*transform.name = GetPseudo._usernameResponse.username;
             _playerShowInfoUI.SetName(GetPseudo._usernameResponse.username);*/
 
             //_playerName = _playerInfos.username;
-            
-            if(IsServer)
+
+            if (IsServer)
             {
                 _playerAttack.OnEnemyBursted.AddListener(() => IncreaseScoreRPC(_burstedScoreEarn));
                 _playerBurst.OnEndBurstedEvent.AddListener(ResetDamage);
@@ -81,7 +95,7 @@ namespace Player
         {
             TakeDamageRPC(amount);
             _animator.SetTrigger("TakeDamage");
-            if(_dmgTaken.Value >= _maxDmgTaken)
+            if (_dmgTaken.Value >= _maxDmgTaken)
                 _playerBurst.Burst();
             _playerShowInfoUI.SetDamage(_dmgTaken.Value);
             return _dmgTaken.Value >= _damageLimit;
@@ -115,14 +129,14 @@ namespace Player
         {
             UseItemRpc();
         }
-        
+
         [Rpc(SendTo.Server)]
         private void UseItemRpc()
         {
             if (!_item)
                 return;
             _onUseItem.Invoke(_itemName);
-            
+
             foreach (Item item in _item.GetComponents<Item>())
             {
                 item?.Do();
@@ -131,7 +145,7 @@ namespace Player
                     _animator.SetBool("hasGun", false);
                 }
             }
-            
+
             _item = null;
         }
 
@@ -139,7 +153,7 @@ namespace Player
         {
             StartCoroutine(ModifySpeedCoroutine(speedModifier, duration));
         }
-        
+
         private IEnumerator ModifySpeedCoroutine(float speedModifier, float duration)
         {
             _playerMovement.ModifySpeed(speedModifier);
@@ -169,7 +183,7 @@ namespace Player
                     itemDispenser.Despawn();
                     return;
                 }
-                
+
                 GameObject item = itemDispenser.GetItem();
                 _itemName = item.name;
 
@@ -205,9 +219,9 @@ namespace Player
                         _item.transform.localPosition = Vector3.zero;
                         _item.transform.up = transform.up;
                         _item.GetComponent<NetworkObject>().Spawn(true);
-                        
+
                         _animator.SetBool("hasGun", true);
-                        
+
                         itemComponent.OnDo.AddListener(_ => _playerAttack.EjectedSelf(this));
                         itemComponent.OnDo.RemoveAllListeners();
                     }
@@ -225,9 +239,9 @@ namespace Player
             _playerMovement.Freeze(true);
             _playerRotation.Freeze(true);
             _spriteRenderer.color = Color.cyan;
-            
+
             yield return new WaitForSeconds(freezeDuration);
-            
+
             _playerMovement.Freeze(false);
             _playerRotation.Freeze(false);
             _spriteRenderer.color = Color.white;
@@ -239,8 +253,7 @@ namespace Player
         public UnityEvent<string> OnUseItem => _onUseItem;
         public UnityEvent<string> OnEndItem => _onEndItem;
         public UnityEvent<string> OnGetItem => _onGetItem;
-        
-        public event System.Action OnDestroyed;
 
+        public event System.Action OnDestroyed;
     }
 }
